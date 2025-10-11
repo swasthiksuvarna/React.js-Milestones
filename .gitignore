@@ -1,0 +1,14 @@
+# Ignore nested git metadata
+**/.git
+
+# Common ignores
+node_modules/
+dist/
+build/
+.env
+.vscode/
+.idea/
+.DS_Store
+
+# OS files
+Thumbs.db
