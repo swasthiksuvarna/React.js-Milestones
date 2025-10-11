@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Milestone 2</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Add responsive styles */
+    @media (max-width: 768px) {
+      .m-\[41px\] {
+        margin: 16px !important;
+      }
+
+      .p-6 {
+        padding: 16px !important;
+      }
+
+      .overflow-x-auto {
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+
+<body class="mainScreenBackground font-body">
+  <div class="w-full p-4 backgroundColor border-b borderColor flex items-center justify-between">
+    <!-- Logo Section -->
+    <div class="flex items-center space-x-2">
+      <div class="pr-1 cursor-pointer md:hidden" id="menu-btn">
+        <svg class="w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke-width="1.5"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
+        </svg>
+      </div>
+      <div class="pr-1 cursor-pointer md:hidden" id="mobile-search-btn">
+        <svg class="w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" stroke-width="1.5"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+        </svg>
+      </div>
+      <span class="block dark:hidden"><img src="./images/LightLogo.svg" /></span>
+      <span class="hidden dark:block"><img src="./images/DarkLogo.svg" /></span>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="flex-1 mx-2 sm:mx-4 hidden md:block">
+      <div class="relative w-full min-w-48 max-w-xl sm:max-w-2xl md:max-w-6xl lg:max-w-7xl xl:max-w-none"
+        style="margin-left: 95px; max-width: 50vw;">
+        <input type="text" placeholder="Search..."
+          class="w-full pl-10 pr-4 py-2 rounded-md iconsBackground focus:outline-none focus:ring-2 focus:ring-purple-500" />
+        <div class="absolute left-3 top-2.5 text-gray-400">
+          <span class="block dark:hidden"><img src="./images/search-light.svg" /></span>
+          <span class="hidden dark:block"><img src="./images/search-dark.svg" /></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Icons Section -->
+    <div class="flex items-center space-x-4 flex-shrink-0">
+      <button onclick="document.documentElement.classList.toggle('dark')" class="p-2 iconsBackground rounded-15">
+        <span class="block dark:hidden"><img src="./images/moon.svg" /></span>
+        <span class="hidden dark:block"><img src="./images/sun.svg" /></span>
+      </button>
+
+      <!-- Notification bell with red dot -->
+      <div class="relative">
+        <button class="p-2 iconsBackground rounded-15">
+          <span class="block dark:hidden"><img src="./images/notification-light.svg" /></span>
+          <span class="hidden dark:block"><img src="./images/notification-dark.svg" /></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Search Overlay -->
+  <div id="mobile-search-overlay" class="hidden md:hidden w-full backgroundColor border-b borderColor p-4">
+    <div class="relative w-full">
+      <input type="text" placeholder="Search..."
+        class="w-full pl-10 pr-4 py-2 rounded-md iconsBackground focus:outline-none focus:ring-2 focus:ring-purple-500" />
+      <div class="absolute left-3 top-2.5 text-gray-400">
+        <span class="block dark:hidden"><img src="./images/search-light.svg" /></span>
+        <span class="hidden dark:block"><img src="./images/search-dark.svg" /></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex">
+    <div class="w-64 backgroundColor hidden md:block shadow-md border-[1px] borderColor">
+      <nav>
+        <ul class="text-sm mt-6 space-y-3" id="menu">
+          <li class="rounded-md py-2 px-9 flex items-center">
+            <!-- Left side: Profile Icon + Name/Role -->
+            <div class="flex items-center mr-7">
+              <img src="./images/profile-icon.svg" class="w-10 h-10 rounded-full mr-3" alt="Profile" />
+              <div class="flex flex-col">
+                <span class="text-sm font-medium text-gray-900 dark:text-white">
+                  John Doe
+                </span>
+                <span class="text-xs text-gray-500 dark:text-gray-400">
+                  Admin
+                </span>
+              </div>
+            </div>
+
+            <!-- Right side: Three dots -->
+            <div
+              class="w-8 h-8 flex justify-around pt-1 text-[18px] leading-none text-gray-600 dark:text-gray-300 bg-iconBackground-light dark:bg-iconBackground-dark rounded-[10px] cursor-pointer">
+              ...
+            </div>
+          </li>
+
+          <li class="bg-selectedBackground-light dark:bg-selectedBackground-dark py-2 relative">
+            <a href="#" class="flex items-center">
+              <!-- Simulated border as an internal element -->
+              <span class="h-9 w-[6px] bg-primary rounded-r-md mr-8"></span>
+
+              <img src="./images/dashboard.svg" class="w-[28px] h-[28px] mr-3" />
+              <span class="text-primary text-base">Dashboard</span>
+            </a>
+          </li>
+          <li class="py-2 relative">
+            <a href="#" class="flex items-center ml-9">
+              <img src="./images/finance.svg" class="w-[28px] h-[28px] mr-3 filter invert dark:invert-0 border-4" style="border-color: #000000;" />
+              <span class="textColor text-base">Finance</span>
+            </a>
+          </li>
+          <li class="py-2 relative">
+            <a href="#" class="flex items-center ml-9">
+              <img src="./images/employess.svg" class="w-[28px] h-[28px] mr-3 filter invert dark:invert-0" />
+              <span class="textColor text-base">Employees</span>
+            </a>
+          </li>
+          <li class="py-2 relative">
+            <a href="#" class="flex items-center ml-9">
+              <img src="./images/company.svg" class="w-[28px] h-[28px] mr-3 filter invert dark:invert-0" />
+              <span class="textColor text-base">Company</span>
+            </a>
+          </li>
+          <li class="py-2 relative">
+            <a href="#" class="flex items-center ml-9">
+              <img src="./images/candidate.svg" class="w-[28px] h-[28px] mr-3 filter invert dark:invert-0" />
+              <span class="textColor text-base">Candidate</span>
+            </a>
+          </li>
+          <li class="py-2 relative">
+            <a href="#" class="flex items-center ml-9">
+              <img src="./images/calender.svg" class="w-[28px] h-[28px] mr-3 filter invert dark:invert-0" />
+              <span class="textColor text-base">Calender</span>
+            </a>
+          </li>
+          <li class="border-t border-dashed border-gray-300 dark:border-gray-600 my-3"></li>
+          <li class="py-2 relative">
+            <a href="#" class="flex items-center ml-9">
+              <img src="./images/profile.svg" class="w-[28px] h-[28px] mr-3 filter invert dark:invert-0" />
+              <span class="textColor text-base">Profile</span>
+            </a>
+          </li>
+          <li class="py-2 relative">
+            <a href="#" class="flex items-center ml-9">
+              <img src="./images/settings.svg" class="w-[28px] h-[28px] mr-3 filter invert dark:invert-0" />
+              <span class="textColor text-base">Setting</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <!-- Main content container with responsive margin -->
+    <div class="flex-1 m-[41px] sm:m-6 md:m-[41px] overflow-hidden">
+      <!-- Stats Cards - Made responsive -->
+      <div class="grid gap-4 md:gap-6 grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
+        <div class="backgroundColor p-4 md:p-5 rounded-[6px] shadow-md border borderColor w-full">
+          <div class="flex justify-between items-start">
+            <h2 class="text-sm textColor">Total Employees</h2>
+            <div class="flex items-center bg-green-100 text-green-600 text-xs px-2 py-0.5 rounded-full">
+              <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="m10 10.414 4 4 5.707-5.707L22 11V5h-6l2.293 2.293L14 11.586l-4-4-7.707 7.707 1.414 1.414L10 10.414z" />
+              </svg>
+              10.0%
+            </div>
+          </div>
+          <div class="mt-4">
+            <p class="text-3xl textColor">856</p>
+            <p class="text-sm text-gray-400 mt-1">Employee</p>
+          </div>
+        </div>
+        <div class="backgroundColor p-4 md:p-5 rounded-[6px] shadow-md border borderColor w-full">
+          <div class="flex justify-between items-start">
+            <h2 class="text-sm textColor">Job View</h2>
+            <div class="flex items-center bg-green-100 text-green-600 text-xs px-2 py-0.5 rounded-full">
+              <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="m10 10.414 4 4 5.707-5.707L22 11V5h-6l2.293 2.293L14 11.586l-4-4-7.707 7.707 1.414 1.414L10 10.414z" />
+              </svg>
+              22.0%
+            </div>
+          </div>
+          <div class="mt-4">
+            <p class="text-3xl textColor">3,342</p>
+            <p class="text-sm text-gray-400 mt-1">Viewers</p>
+          </div>
+        </div>
+
+        <div class="backgroundColor p-4 md:p-5 rounded-[6px] shadow-md border borderColor w-full">
+          <div class="flex justify-between items-start">
+            <h2 class="text-sm textColor">Job Applied</h2>
+            <div class="flex items-center bg-green-100 text-green-600 text-xs px-2 py-0.5 rounded-full">
+              <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="m10 10.414 4 4 5.707-5.707L22 11V5h-6l2.293 2.293L14 11.586l-4-4-7.707 7.707 1.414 1.414L10 10.414z" />
+              </svg>
+              12.0%
+            </div>
+          </div>
+          <div class="mt-4">
+            <p class="text-3xl text-gray-900 dark:text-white">77</p>
+            <p class="text-sm text-gray-400 mt-1">Applicants</p>
+          </div>
+        </div>
+
+        <div class="backgroundColor p-4 md:p-5 rounded-[6px] shadow-md border borderColor w-full">
+          <div class="flex justify-between items-start">
+            <h2 class="text-sm textColor">Resigned Employees</h2>
+            <div class="flex items-center bg-red-100 text-red-600 text-xs px-2 py-0.5 rounded-full">
+              <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="m10 10.414 4 4 5.707-5.707L22 11V5h-6l2.293 2.293L14 11.586l-4-4-7.707 7.707 1.414 1.414L10 10.414z"
+                  transform="rotate(60 12 12)" />
+              </svg>
+              7.0%
+            </div>
+          </div>
+          <div class="mt-4">
+            <p class="text-3xl textColor">17</p>
+            <p class="text-sm text-gray-400 mt-1">Employee</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Graph - Made responsive -->
+      <div>
+        <div
+          class="backgroundColor p-4 md:p-6 rounded-md shadow-md border borderColor w-full mt-6 md:mt-8 overflow-x-auto">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-3">
+            <h2 class="text-lg font-normal textColor">Job Statistics</h2>
+            <div class="flex flex-wrap items-center gap-4">
+              <label class="text-sm flex items-center gap-1 textColor">
+                <input type="checkbox" checked class="accent-gray-400" id="toggle-view" />
+                Job View
+              </label>
+              <label class="text-sm flex items-center gap-1 textColor">
+                <input type="checkbox" checked class="accent-purple-500" id="toggle-applied" />
+                Job Applied
+              </label>
+              <select class="iconsBackground blueTextColor text-sm px-3 py-2 rounded-xl">
+                <option>This Month</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Chart container with minimum width to ensure it's scrollable on mobile -->
+          <div class="relative h-[220px] pt-6 min-w-[600px] mt-8">
+            <!-- Horizontal grid lines aligned with Y-axis labels (100, 80, 60, 40, 20) -->
+            <div class="absolute border-t border-dashed border-gray-300 dark:border-gray-600"
+              style="top: 6px; left: 60px; right: 20px;"></div>
+            <div class="absolute border-t border-dashed border-gray-300 dark:border-gray-600"
+              style="top: 60px; left: 60px; right: 20px;"></div>
+            <div class="absolute border-t border-dashed border-gray-300 dark:border-gray-600"
+              style="top: 114px; left: 60px; right: 20px;"></div>
+            <div class="absolute border-t border-dashed border-gray-300 dark:border-gray-600"
+              style="top: 168px; left: 60px; right: 20px;"></div>
+            <div class="absolute border-t border-dashed border-gray-300 dark:border-gray-600"
+              style="top: 220px; left: 60px; right: 20px;"></div>
+
+            <div class="absolute left-0 top-0 bottom-0 flex flex-col justify-between text-xs text-gray-500 z-10 pl-2">
+              <span>100</span>
+              <span>80</span>
+              <span>60</span>
+              <span>40</span>
+              <span>20</span>
+            </div>
+
+            <div class="absolute inset-0 left-10 flex items-end justify-between px-4 h-full w-[calc(100%-40px)]"
+              id="chart-container" style="z-index: 5;"></div>
+          </div>
+
+          <div class="flex justify-around text-sm text-gray-400 mt-3 px-4 ml-6 min-w-[600px]" id="month-labels">
+            <span style="width: 50px; text-align: center;">Jan</span>
+            <span style="width: 50px; text-align: center;">Feb</span>
+            <span style="width: 50px; text-align: center;">Mar</span>
+            <span style="width: 50px; text-align: center;">Apr</span>
+            <span style="width: 50px; text-align: center;">May</span>
+            <span style="width: 50px; text-align: center;">Jun</span>
+            <span style="width: 50px; text-align: center;">Jul</span>
+            <span style="width: 50px; text-align: center;">Aug</span>
+            <span style="width: 50px; text-align: center;">Sep</span>
+            <span style="width: 50px; text-align: center;">Oct</span>
+            <span style="width: 50px; text-align: center;">Nov</span>
+            <span style="width: 50px; text-align: center;">Dec</span>
+          </div>
+        </div>
+        <div id="tooltip"
+          class="absolute w-8 h-6 flex items-center justify-center text-xs font-medium rounded text-white shadow-lg hidden pointer-events-none z-50"
+          style="transform: translateX(-50%);"></div>
+      </div>
+
+      <!-- Employee status and composition section - Made responsive -->
+      <div class="flex flex-col lg:flex-row gap-4 md:gap-8 w-full mx-auto mt-6 md:mt-8">
+        <!-- Employee status -->
+        <div class="backgroundColor p-4 md:p-6 rounded-md shadow-md border borderColor w-full lg:w-2/3 overflow-x-auto">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 md:mb-6 gap-3 mr-3">
+            <h2 class="text-lg font-normal textColor">Employee Status</h2>
+            <button class="flex items-center gap-1 px-2 py-2 rounded-md text-sm filterSortBtn responsiveFilterBtn">
+              Filter & Short
+              <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
+                <path d="M17.6436 4.16663H15.1436" stroke="currentColor" stroke-width="1.66667" stroke-linecap="round"
+                  stroke-linejoin="round" />
+                <path d="M11.8102 2.5V5.83333" stroke="currentColor" stroke-width="1.66667" stroke-linecap="round"
+                  stroke-linejoin="round" />
+                <path d="M11.8102 4.16663H2.64355" stroke="currentColor" stroke-width="1.66667" stroke-linecap="round"
+                  stroke-linejoin="round" />
+                <path d="M5.97689 10H2.64355" stroke="currentColor" stroke-width="1.66667" stroke-linecap="round"
+                  stroke-linejoin="round" />
+                <path d="M9.31018 8.33337V11.6667" stroke="currentColor" stroke-width="1.66667" stroke-linecap="round"
+                  stroke-linejoin="round" />
+                <path d="M18.4768 10H9.31018" stroke="currentColor" stroke-width="1.66667" stroke-linecap="round"
+                  stroke-linejoin="round" />
+                <path d="M17.6436 15.8334H15.1436" stroke="currentColor" stroke-width="1.66667" stroke-linecap="round"
+                  stroke-linejoin="round" />
+                <path d="M11.8102 14.1666V17.5" stroke="currentColor" stroke-width="1.66667" stroke-linecap="round"
+                  stroke-linejoin="round" />
+                <path d="M11.8102 15.8334H2.64355" stroke="currentColor" stroke-width="1.66667" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Table container with min-width to make it scrollable horizontally on small screens -->
+          <div class="overflow-x-auto pr-12">
+            <table class="w-full" style="min-width: 600px;">
+              <thead>
+                <tr class="border-b borderColor">
+                  <th class="text-left py-3 tableHeading">
+                    Employee Name
+                  </th>
+                  <th class="text-left py-3 tableHeading">
+                    Department
+                  </th>
+                  <th class="text-left py-3 tableHeading">Age</th>
+                  <th class="text-left py-3 tableHeading">
+                    Discipline
+                  </th>
+                  <th class="text-left py-3 tableHeading">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b borderColor">
+                  <td class="py-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center overflow-hidden">
+                        <img src="./images/profile-icon.svg" alt="Justin" class="w-full h-full object-cover" />
+                      </div>
+                      <span class="textColor">Justin Lipshutz</span>
+                    </div>
+                  </td>
+                  <td class="py-4 textColor">Marketing</td>
+                  <td class="py-4 textColor">22</td>
+                  <td class="py-4">
+                    <span><span style="color: #16C098;">+</span><span class="textColor">100%</span></span>
+                  </td>
+                  <td class="py-4">
+                    <span class="px-3 py-1 rounded-md text-sm statusPermanent">Permanent</span>
+                  </td>
+                </tr>
+
+                <tr class="border-b borderColor">
+                  <td class="py-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center overflow-hidden">
+                        <img src="./images/profile-icon.svg" alt="Marcus" class="w-full h-full object-cover" />
+                      </div>
+                      <span class="textColor">Marcus Culhane</span>
+                    </div>
+                  </td>
+                  <td class="py-4 textColor">Finance</td>
+                  <td class="py-4 textColor">24</td>
+                  <td class="py-4">
+                    <span><span style="color: #16C098;">+</span><span class="textColor">95%</span></span>
+                  </td>
+                  <td class="py-4">
+                    <span class="px-3 py-1 rounded-md text-sm statusContract">Contract</span>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="py-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center overflow-hidden">
+                        <img src="./images/profile-icon.svg" alt="Leo" class="w-full h-full object-cover" />
+                      </div>
+                      <span class="textColor">Leo Stanton</span>
+                    </div>
+                  </td>
+                  <td class="py-4 textColor">R&D</td>
+                  <td class="py-4 textColor">28</td>
+                  <td class="py-4">
+                    <span><span style="color: #16C098;">+</span><span class="textColor">89%</span></span>
+                  </td>
+                  <td class="py-4">
+                    <span class="px-3 py-1 rounded-md text-sm statusPermanent">Permanent</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Employee composition - Made responsive -->
+        <div
+          class="backgroundColor p-4 md:p-6 rounded-md shadow-md border borderColor w-full lg:w-1/3 flex flex-col items-center justify-center">
+          <h2 class="text-lg font-normal textColor mb-4 md:mb-6 self-start">
+            Employee Composition
+          </h2>
+
+          <!-- Responsive chart sizing -->
+          <div class="relative w-36 h-36 sm:w-48 sm:h-48">
+            <svg xmlns="http://www.w3.org/2000/svg" width="186" height="173" viewBox="0 0 186 173" fill="none">
+              <path
+                d="M96.3086 4.47186C111.324 3.51366 126.322 6.60147 139.738 13.4133C153.154 20.2251 164.497 30.5115 172.584 43.1998C180.671 55.8881 185.206 70.5137 185.716 85.5513C186.225 100.589 182.691 115.488 175.482 128.695C168.273 141.902 157.653 152.933 144.729 160.637C131.805 168.342 117.051 172.438 102.005 172.499C86.9585 172.56 72.1715 168.583 59.1856 160.983C46.1998 153.384 35.4906 142.439 28.1749 129.291L53.1603 115.389C57.9888 124.067 65.057 131.29 73.6278 136.306C82.1987 141.322 91.9583 143.947 101.889 143.907C111.82 143.867 121.558 141.163 130.088 136.078C138.618 130.993 145.627 123.712 150.385 114.995C155.143 106.279 157.476 96.4451 157.139 86.52C156.803 76.595 153.81 66.9419 148.472 58.5675C143.135 50.193 135.648 43.4039 126.794 38.908C117.939 34.4121 108.04 32.3741 98.1295 33.0065L96.3086 4.47186Z"
+                fill="#16C098" />
+              <g filter="url(#filter0_d_701_212)">
+                <path
+                  d="M28.6446 139.897C19.0964 126.773 13.3792 111.275 12.1255 95.1163C10.8718 78.9575 14.1305 62.7683 21.541 48.3397C28.9516 33.9111 40.2251 21.8056 54.1144 13.3624C68.0037 4.91931 83.9672 0.467726 100.239 0.500176L100.157 41.1803C91.4205 41.1628 82.8493 43.553 75.3918 48.0863C67.9343 52.6196 61.8812 59.1194 57.9023 66.8665C53.9234 74.6135 52.1737 83.3059 52.8469 91.982C53.52 100.658 56.5897 108.979 61.7164 116.026L28.6446 139.897Z"
+                  fill="#5832E6" />
+              </g>
+              <defs>
+                <filter id="filter0_d_701_212" x="0.459936" y="-3.3011" width="111.182" height="162.203"
+                  filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                  <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                  <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                    result="hardAlpha" />
+                  <feOffset dy="7.60221" />
+                  <feGaussianBlur stdDeviation="5.70166" />
+                  <feComposite in2="hardAlpha" operator="out" />
+                  <feColorMatrix type="matrix" values="0 0 0 0 0.52849 0 0 0 0 0.566891 0 0 0 0 0.9125 0 0 0 0.3 0" />
+                  <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_701_212" />
+                  <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_701_212" result="shape" />
+                </filter>
+              </defs>
+            </svg>
+            <div class="absolute bottom-0 right-0 chartTooltip rounded-md px-2 py-1 flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="11" height="25" viewBox="0 0 11 25" fill="none">
+                <g clip-path="url(#clip0_909_208)">
+                  <path
+                    d="M5.49881 0.00231934C7.20447 0.00231934 8.58721 1.38505 8.58721 3.09072C8.58721 4.79638 7.20447 6.17911 5.49881 6.17911C3.79314 6.17911 2.41041 4.79638 2.41041 3.09072C2.41041 1.38505 3.79314 0.00231934 5.49881 0.00231934ZM7.81511 6.95121H7.26692C6.17097 7.45515 4.87389 7.47692 3.7307 6.95121H3.18251C1.90324 6.95121 0.866211 7.98824 0.866211 9.26751V15.8304C0.866211 16.47 1.38472 16.9885 2.02436 16.9885H2.79646V23.5514C2.79646 24.191 3.31497 24.7095 3.95461 24.7095H7.04301C7.68264 24.7095 8.20116 24.191 8.20116 23.5514V16.9885H8.97326C9.61289 16.9885 10.1314 16.47 10.1314 15.8304V9.26751C10.1314 7.98824 9.09438 6.95121 7.81511 6.95121Z"
+                    fill="#19D7AA" />
+                </g>
+                <defs>
+                  <clipPath id="clip0_909_208">
+                    <rect width="9.26519" height="24.7072" fill="white" transform="translate(0.865967 0.00280762)" />
+                  </clipPath>
+                </defs>
+              </svg>
+              <span class="text-sm font-medium tooltipText">65%</span>
+            </div>
+
+            <div class="absolute top-0 left-0 chartTooltip rounded-md px-2 py-1 flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="27" viewBox="0 0 14 27" fill="none">
+                <g clip-path="url(#clip0_909_204)">
+                  <path
+                    d="M7.36343 0.5C9.15834 0.5 10.6134 1.95509 10.6134 3.75C10.6134 5.54491 9.15834 7 7.36343 7C5.56851 7 4.11343 5.54491 4.11343 3.75C4.11343 1.95509 5.56851 0.5 7.36343 0.5ZM13.4208 18.4857L10.9833 8.73565C10.9173 8.47197 10.7652 8.2379 10.5509 8.07063C10.3367 7.90336 10.0727 7.8125 9.80093 7.8125H9.22405C8.07076 8.34281 6.70581 8.36571 5.5028 7.8125H4.92593C4.65413 7.8125 4.39014 7.90336 4.17591 8.07063C3.96168 8.2379 3.80951 8.47197 3.74359 8.73565L1.30609 18.4857C1.11403 19.2538 1.69538 20 2.48843 20H5.33218V25.2812C5.33218 25.9544 5.87782 26.5 6.55093 26.5H8.17593C8.84903 26.5 9.39468 25.9544 9.39468 25.2812V20H12.2384C13.0302 20 13.6131 19.255 13.4208 18.4857Z"
+                    fill="#6B49E9" />
+                </g>
+                <defs>
+                  <clipPath id="clip0_909_204">
+                    <rect width="13" height="26" fill="white" transform="translate(0.863281 0.5)" />
+                  </clipPath>
+                </defs>
+              </svg>
+              <span class="text-sm font-medium tooltipText">35%</span>
+            </div>
+          </div>
+
+          <p class="text-gray-400 text-sm mt-4 md:mt-6">856 employee total</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Job data for the stacked bar chart
+      const jobData = [
+        { month: "Jan", view: 75, applied: 52 },
+        { month: "Feb", view: 80, applied: 62 },
+        { month: "Mar", view: 85, applied: 70 },
+        { month: "Apr", view: 70, applied: 56 },
+        { month: "May", view: 65, applied: 44 },
+        { month: "Jun", view: 90, applied: 56 },
+        { month: "Jul", view: 78, applied: 62 },
+        { month: "Aug", view: 85, applied: 72 },
+        { month: "Sep", view: 75, applied: 64 },
+        { month: "Oct", view: 82, applied: 58 },
+        { month: "Nov", view: 88, applied: 50 },
+        { month: "Dec", view: 95, applied: 72 },
+      ];
+
+      function renderBars() {
+        const chartContainer = document.getElementById("chart-container");
+        const tooltip = document.getElementById("tooltip");
+
+        if (!chartContainer) return;
+
+        // Clear existing content
+        chartContainer.innerHTML = "";
+
+        // Set explicit height and spacing
+        chartContainer.style.height = "100%";
+
+        // Create bars for each month
+        jobData.forEach((data, index) => {
+          const barWrapper = document.createElement("div");
+          // Set wider width for bars with reduced margin for spacing
+          barWrapper.style.width = "70px";
+          barWrapper.style.margin = "0 2px"; // 4px total gap between bars
+          barWrapper.style.height = "100%";
+          barWrapper.className = "flex flex-col justify-end items-center relative";
+
+          const viewHeight = ((data.view - 20) / 80) * 100; // Adjust for 20-100 range
+          const appliedHeight = ((data.applied - 20) / 80) * 100; // Adjust for 20-100 range
+
+          // Top bar (view) with specified colors
+          const viewBar = document.createElement("div");
+          viewBar.className = "w-full rounded absolute bottom-0";
+          viewBar.style.height = `${viewHeight}%`;
+          viewBar.style.minHeight = "1px";
+          viewBar.dataset.tooltip = `Job View: ${data.view}`;
+
+          // Bottom bar (applied) with specified colors
+          const appliedBar = document.createElement("div");
+          appliedBar.className = "w-full rounded absolute bottom-0";
+          appliedBar.style.height = `${appliedHeight}%`;
+          appliedBar.style.minHeight = "1px";
+          appliedBar.dataset.tooltip = `Job Applied: ${data.applied}`;
+
+          // Set colors based on dark/light mode (corrected order)
+          if (document.documentElement.classList.contains('dark')) {
+            viewBar.style.backgroundColor = "#2D2D2D"; // Dark mode purple
+            appliedBar.style.backgroundColor = "#6C49EC"; // Dark mode gray
+          } else {
+            viewBar.style.backgroundColor = "#F2EFFF"; // Light mode purple
+            appliedBar.style.backgroundColor = "#5832E6"; // Light mode gray
+          }
+
+          // Add tooltip event listeners
+          [viewBar, appliedBar].forEach((el) => {
+            el.addEventListener("mousemove", (e) => {
+              const rect = el.getBoundingClientRect();
+              const barCenterX = rect.left + rect.width / 2;
+              const number = el.dataset.tooltip.split(': ')[1];
+              const barColor = el.style.backgroundColor;
+              const isJobView = el.dataset.tooltip.includes('Job View');
+              const isDarkMode = document.documentElement.classList.contains('dark');
+
+              tooltip.classList.remove("hidden");
+              tooltip.textContent = number;
+              tooltip.style.left = `${barCenterX}px`;
+              tooltip.style.top = `${rect.top - 45}px`;
+              tooltip.style.backgroundColor = barColor;
+              tooltip.style.setProperty('--tooltip-color', barColor);
+
+              // Set text color: black for Job View in light mode, white otherwise
+              tooltip.style.color = (isJobView && !isDarkMode) ? 'black' : 'white';
+
+              // Highlight corresponding month label
+              const monthLabels = document.querySelectorAll("#month-labels span");
+              if (monthLabels[index]) {
+                monthLabels[index].style.fontWeight = 'bold';
+                monthLabels[index].style.color = isDarkMode ? '#EAE0E0' : '#292D32';
+              }
+            });
+            el.addEventListener("mouseleave", () => {
+              tooltip.classList.add("hidden");
+
+              // Reset month label styling
+              const monthLabels = document.querySelectorAll("#month-labels span");
+              if (monthLabels[index]) {
+                monthLabels[index].style.fontWeight = 'normal';
+                monthLabels[index].style.color = '';
+              }
+            });
+          });
+
+          // Toggle visibility based on checkboxes
+          const toggleView = document.getElementById("toggle-view");
+          const toggleApplied = document.getElementById("toggle-applied");
+
+          if (toggleView && !toggleView.checked) viewBar.style.display = "none";
+          if (toggleApplied && !toggleApplied.checked) appliedBar.style.display = "none";
+
+          // Stack the bars (corrected order)
+          barWrapper.appendChild(viewBar);
+          barWrapper.appendChild(appliedBar);
+          chartContainer.appendChild(barWrapper);
+        });
+      }
+
+      // Fix month label alignment
+      setTimeout(() => {
+        const monthLabels = document.querySelectorAll("#month-labels span");
+        const chartBars = document.querySelectorAll("#chart-container > div");
+
+        if (monthLabels.length === chartBars.length) {
+          monthLabels.forEach((label, index) => {
+            if (chartBars[index]) {
+              const barRect = chartBars[index].getBoundingClientRect();
+              const labelRect = label.getBoundingClientRect();
+              const offset = (barRect.left + barRect.width / 2) - (labelRect.left + labelRect.width / 2);
+              label.style.transform = `translateX(${offset}px)`;
+            }
+          });
+        }
+      }, 100);
+
+      // Initialize chart
+      renderBars();
+
+      // Add event listeners for toggles
+      const toggleView = document.getElementById("toggle-view");
+      const toggleApplied = document.getElementById("toggle-applied");
+
+      if (toggleView) toggleView.addEventListener("change", renderBars);
+      if (toggleApplied) toggleApplied.addEventListener("change", renderBars);
+
+      // Listen for dark mode changes
+      const darkModeButton = document.querySelector('button[onclick="document.documentElement.classList.toggle(\'dark\')"]');
+      if (darkModeButton) {
+        darkModeButton.addEventListener('click', renderBars);
+      }
+
+      // Mobile menu toggle
+      const menuBtn = document.getElementById('menu-btn');
+      if (menuBtn) {
+        menuBtn.addEventListener('click', function () {
+          const menu = document.querySelector('#menu').closest('.w-64');
+          menu.classList.toggle('hidden');
+          menu.classList.toggle('block');
+        });
+      }
+
+      // Mobile search toggle
+      const mobileSearchBtn = document.getElementById('mobile-search-btn');
+      const mobileSearchOverlay = document.getElementById('mobile-search-overlay');
+      if (mobileSearchBtn && mobileSearchOverlay) {
+        mobileSearchBtn.addEventListener('click', function () {
+          mobileSearchOverlay.classList.toggle('hidden');
+        });
+      }
+    });
+  </script>
+  </script>
+</body>
+
+</html>

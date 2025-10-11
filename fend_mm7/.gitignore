@@ -1,0 +1,12 @@
+.env
+node_modules
+README.md
+.DS_Store
+dist
+.vscode
+.idea
+*.log
+*.tsbuildinfo
+coverage
+*.orig
+*.jar

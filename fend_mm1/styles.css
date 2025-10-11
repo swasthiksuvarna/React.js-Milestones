@@ -1,0 +1,309 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;900&display=swap');
+
+:root {
+  --bs-primary: #111b47;
+  /* Change Bootstrap primary color */
+}
+
+body {
+  background-color: white;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 20px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  align-items: center;
+  color: #37447E;
+}
+
+.navlinks {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 33%;
+  color: #505f98;
+}
+
+.pageHeading {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 33%;
+  font-size: 23px;
+  font-weight: 600;
+}
+
+.buyNowButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 33%;
+}
+
+.button-primary {
+  width: 35%;
+  background-color: #111b47;
+  padding: 5px;
+  border-radius: 2px;
+  border: 0px;
+  color: white;
+}
+
+.button-secondary {
+  width: 35%;
+  background-color: transparent;
+  border-color: #111b47;
+  padding: 5px;
+  border-radius: 2px;
+  border-width: 2px;
+  color: #111b47;
+  margin-left: 30px;
+}
+
+.image-contents {
+  display: flex;
+  width: 50%;
+  justify-content: flex-end;
+  padding: 50px 50px 50px 50px;
+}
+
+.text-contents {
+  width: 50%;
+  padding: 0px 0px 0px 100px;
+  text-align: justify;
+  /* Ensures text is justified */
+}
+
+#section {
+  width: 100vw;
+  min-height: 100vh;
+  /* background-color: black; */
+}
+
+#section1 {
+  width: 100vw;
+  min-height: 150vh;
+  background-image: url("./images/backgroundImage.png");
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-size: 60% auto;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  #section1 {
+    background-position-x: center;
+    background-size: cover;
+  }
+}
+
+#section2 {
+  width: 100vw;
+  min-height: 100vh;
+  padding-top: 10rem;
+  /* background-color: black; */
+}
+
+#section6 {
+  width: 100vw;
+  min-height: 100vh;
+  background-image: url("./images/section6.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 20rem;
+
+}
+
+/* Custom Navbar Styling */
+.custom-navbar {
+  padding: 20px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  color: #37447e;
+}
+
+/* Navigation Links */
+.custom-nav-link {
+  color: #505f98 !important;
+  font-weight: 400;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+/* Centered Heading */
+.custom-heading {
+  font-size: 26px !important;
+  font-weight: 900 !important;
+  color: #37447e !important;
+}
+
+/* Buy Now Button */
+.custom-button {
+  background-color: #111b47 !important;
+  padding: 5px 70px !important;
+  border-radius: 3px !important;
+  color: white !important;
+  font-weight: 500;
+  font-size: 12px !important;
+  min-width: 120px !important;
+  /* width: 40% !important; */
+}
+
+/* Ensure Button is Consistent */
+.custom-button:hover {
+  background-color: #0d143b !important;
+}
+
+.icon-image-section2 {
+  margin-top: 80px;
+}
+
+.btn-primary {
+  background-color: #111b47 !important;
+  /* Custom primary color */
+  border-color: #111b47 !important;
+  border-radius: 2px !important;
+  border-width: 2px !important;
+  color: #FFFFFF !important;
+  width: 100%;
+  font-weight: 500 !important;
+}
+
+.btn-primary:hover {
+  background-color: #505f98 !important;
+  /* Darker shade on hover */
+  border-color: #505f98 !important;
+}
+
+.btn-outline-primary {
+  border-color: #111b47 !important;
+  border-radius: 2px !important;
+  border-width: 2px !important;
+  color: #111b47 !important;
+  width: 100% !important;
+  font-weight: 500 !important;
+}
+
+.btn-primary:hover {
+  background-color: #505f98 !important;
+  /* Darker shade on hover */
+  border-color: #505f98 !important;
+}
+
+section {
+  min-height: 100vh;
+  display: flex;
+  align-items: normal;
+  justify-content: space-around;
+  overflow: hidden;
+  padding-top: 0px;
+}
+
+.custom-b {
+  border-bottom: 1px solid #CDD1D4;
+  /* Change color & thickness as needed */
+}
+
+.custom-footer {
+  background-color: #E7ECFF;
+}
+
+.custom-padding {
+  padding-left: 10rem !important;
+  /* Increase as needed */
+  padding-right: 10rem !important;
+}
+
+/* Reduced container margins */
+.container {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  max-width: 100% !important;
+}
+
+.footer-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.2s ease;
+}
+
+.footer-icon:hover {
+  transform: scale(1.1);
+}
+
+.title-text-color {
+  color: #091133 !important;
+  font-weight: 500 !important;
+}
+
+.subttext-color {
+  color: #505F98 !important;
+  font-weight: 400 !important;
+}
+
+.subttitle-text-color {
+  color: #5D6970 !important;
+  font-size: medium !important;
+}
+
+.subttitle2-text-color {
+  color: #37447E !important;
+}
+
+.dollarsign-text-color {
+  color: #222F65 !important;
+}
+
+.footer-comapny-text-color {
+  color: #939EA4 !important;
+}
+
+/* Text justification utility class */
+.text-justify {
+  text-align: justify !important;
+}
+
+.main-title-color {
+  color: #091133 !important;
+  font-size: 3.4em !important;
+  line-height: 1.2 !important;
+  max-width: 100% !important;
+  font-weight: 500 !important;
+  word-wrap: break-word !important;
+}
+
+.text-width-control {
+  max-width: 85% !important;
+}
+/* Custom button variants */
+.custom-button-medium {
+  background-color: #111b47 !important;
+  padding: 5px 50px !important;
+  border-radius: 3px !important;
+  color: white !important;
+  font-weight: 500;
+  min-width: 130px !important;
+  font-size: medium !important;
+}
+
+.custom-button-medium:hover {
+  background-color: #0d143b !important;
+}
+
+.custom-button-large {
+  background-color: #111b47 !important;
+  padding: 5px 25px !important;
+  border-radius: 3px !important;
+  color: white !important;
+  font-weight: 500;
+  min-width: 80px !important;
+}
+
+.custom-button-large:hover {
+  background-color: #0d143b !important;
+}
