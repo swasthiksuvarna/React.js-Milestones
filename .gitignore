@@ -12,3 +12,4 @@ build/
 
 # OS files
 Thumbs.db
+.git-backups/*.tar.gz
