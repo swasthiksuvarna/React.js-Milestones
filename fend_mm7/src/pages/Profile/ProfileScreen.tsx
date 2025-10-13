@@ -69,13 +69,16 @@ const ProfileScreen: React.FC = () => {
           const result = await getUrl({
             key: attributes.picture,
             options: {
-              accessLevel: 'guest'
+              accessLevel: 'guest',
+              expiresIn: 3600 // 1 hour
             }
           });
           console.log('Profile image URL:', result.url.toString());
           setProfileImageUrl(result.url.toString());
+          setImageError(false);
         } catch (err) {
           console.error('Error getting profile image URL:', err);
+          setImageError(true);
         }
       }
     } catch (error) {
@@ -98,21 +101,24 @@ const ProfileScreen: React.FC = () => {
     try {
       setLoading(true);
       
-      // Generate a unique filename - use public/ prefix for public access level
-      const filename = `public/uploads/profile-${Date.now()}-${file.name}`;
+      // Generate a unique filename without public/ prefix for guest access
+      const filename = `uploads/profile-${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '')}`;
       
       // Create a temporary URL for immediate display
       const tempUrl = URL.createObjectURL(file);
       setProfileImageUrl(tempUrl);
       setImageError(false);
       
-      // Upload file to S3
+      // Upload file to S3 with proper configuration
       const uploadResult = await uploadData({
         key: filename,
         data: file,
         options: {
           accessLevel: 'guest',
-          contentType: file.type
+          contentType: file.type,
+          metadata: {
+            'uploaded-by': 'profile-screen'
+          }
         }
       });
       console.log('Upload result:', uploadResult);
@@ -121,11 +127,13 @@ const ProfileScreen: React.FC = () => {
       const result = await getUrl({
         key: filename,
         options: {
-          accessLevel: 'guest'
+          accessLevel: 'guest',
+          expiresIn: 3600 // 1 hour
         }
       });
       
       console.log('Image URL:', result.url.toString());
+      setProfileImageUrl(result.url.toString());
       
       // Update Cognito user attributes with the S3 key
       await updateUserAttributes({

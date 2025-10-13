@@ -32,7 +32,7 @@ export const useClothingApi = () => {
           id: item.id.toString(),
           name: item.title,
           price: item.price,
-          imageUrl: item.images[0] || "",
+          imageUrl: item.images[0]?.includes('placehold.co') ? item.images[0] : `https://placehold.co/600x400/e2e8f0/64748b?text=${encodeURIComponent(item.title.slice(0, 10))}`,
           categoryName: item.category?.name || "unknown",
           category: index < 4 ? "new_arrivals" : "casual",
         }));

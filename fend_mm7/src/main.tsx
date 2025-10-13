@@ -13,13 +13,20 @@ Amplify.configure({
       identityPoolId: import.meta.env.VITE_AWS_IDENTITY_POOL_ID,
       loginWith: {
         email: true
+      },
+      signUpVerificationMethod: 'code',
+      userAttributes: {
+        email: {
+          required: true
+        }
       }
     },
   },
   Storage: {
     S3: {
       bucket: import.meta.env.VITE_S3_BUCKET,
-      region: import.meta.env.VITE_AWS_REGION
+      region: import.meta.env.VITE_AWS_REGION,
+      dangerouslyConnectToHttpEndpointForTesting: false
     }
   }
 });
