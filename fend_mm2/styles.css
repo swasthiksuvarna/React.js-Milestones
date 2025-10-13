@@ -1049,9 +1049,9 @@ video {
   border-radius: 6px;
 }
 
-.rounded-\[\]{
+/* .rounded-\[\]{
   border-radius: ;
-}
+} */
 
 .rounded{
   border-radius: 0.25rem;
