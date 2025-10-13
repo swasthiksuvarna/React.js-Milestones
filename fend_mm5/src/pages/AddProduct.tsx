@@ -128,7 +128,7 @@ const AddProduct: React.FC<AddProductProps> = () => {
           {product ? "Update Product" : "Add Product"}
         </h1>
       </div>
-      <form onSubmit={handleSubmit} className="space-y-6 mt-8 w-full max-w-5xl">
+      <form onSubmit={handleSubmit} className="w-full max-w-5xl mt-8 space-y-6">
         {/* Image Upload */}
         <div>
           <label className="block mb-1 font-medium text-inputHeaderColor">
@@ -145,15 +145,15 @@ const AddProduct: React.FC<AddProductProps> = () => {
               <button
                 type="button"
                 onClick={removeImage}
-                className="absolute top-2 right-2 bg-white text-gray-700 rounded-full p-1 shadow hover:bg-gray-200"
+                className="absolute p-1 text-gray-700 bg-white rounded-full shadow top-2 right-2 hover:bg-gray-200"
               >
                 <X size={16} />
               </button>
             </div>
           ) : (
-            <div className="border-dashed border-2 border-gray-300 p-6 rounded-md relative text-center">
+            <div className="relative p-6 text-center border-2 border-gray-300 border-dashed rounded-md">
               <p className="text-sm text-gray-600">Drag and drop files</p>
-              <p className="text-sm text-gray-400 mb-2">or</p>
+              <p className="mb-2 text-sm text-gray-400">or</p>
               <input
                 type="file"
                 accept="image/png, image/jpeg"
@@ -163,13 +163,15 @@ const AddProduct: React.FC<AddProductProps> = () => {
               />
               <label
                 htmlFor="imageUpload"
-                className="inline-block px-4 py-2 bg-gray-200 text-sm text-gray-700 rounded cursor-pointer"
+                className="inline-block px-4 py-2 text-sm text-gray-700 bg-gray-200 rounded cursor-pointer"
               >
                 Browse
               </label>
-              <p className="text-xs text-gray-400 mt-2">
-                Supported file types: jpg, png and jpeg format
-              </p>
+            <p className="mt-2 text-xs leading-snug text-center text-gray-400">
+          Supported file types: jpg, png and jpeg
+          <br />
+          format
+        </p>
             </div>
           )}
         </div>
