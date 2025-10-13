@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-textColor: #252C32;
+  --color-sidePanelColor: #F6F8F9;
+  --color-sidePanelBorderColor: #E5E9EB;
+  --color-tableTitleColor: #84919A;
+  --color-testColor: #fc0303;
+  --color-inputHeaderColor: #5E6366;
+  --font-family-inter: 'Inter', sans-serif;
+}
+
+@layer utilities {
+  .animate-slide-in {
+    @apply transition-all duration-300 ease-in-out translate-y-0 opacity-100;
+    animation: slide-in 0.3s ease-out;
+  }
+
+  @keyframes slide-in {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
