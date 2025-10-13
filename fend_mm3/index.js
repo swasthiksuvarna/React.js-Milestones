@@ -156,12 +156,20 @@ function createTaskElement(task) {
   return taskElement;
 }
 
-function showToast(message, duration = 3000) {
+function showToast(message, duration = 3000, isError = false) {
   const toast = document.getElementById('toast-container');
   const toastMessage = document.getElementById('toast-message');
+  const toastDiv = toast.querySelector('div');
   
   // Set message
   toastMessage.textContent = message;
+  
+  // Set background color based on error state
+  if (isError) {
+    toastDiv.style.backgroundColor = '#dc2626'; // Red background for errors
+  } else {
+    toastDiv.style.backgroundColor = '#000000a8'; // Default dark background
+  }
   
   // Show toast
   toast.classList.remove('opacity-0', '-translate-y-4');
@@ -176,6 +184,14 @@ function showToast(message, duration = 3000) {
 
 // Add a new task
 function addTask(text) {
+  // Check for duplicate task (case-sensitive)
+  // const isDuplicate = tasks.some(task => task.text.toLowerCase() === text.toLowerCase()); // Old case-insensitive check
+  const isDuplicate = tasks.some(task => task.text === text); // New case-sensitive check
+  if (isDuplicate) {
+    showToast("Task already exists", 3000, true);
+    return;
+  }
+
   const newTask = {
     id: Date.now().toString(),
     text: text,
