@@ -32,6 +32,12 @@ const AddProduct: React.FC<AddProductProps> = () => {
     message: string;
     type: "success" | "error";
   } | null>(null);
+  const [errors, setErrors] = useState({
+    title: false,
+    price: false,
+    image: false
+  });
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
 
   // Prefill if editing
   useEffect(() => {
@@ -39,8 +45,22 @@ const AddProduct: React.FC<AddProductProps> = () => {
       setTitle(product.title);
       setPrice(product.price.toString());
       setDescription(product.description);
-      setImagePreview(product.images?.[0] || null);
+      const imageUrl = product.images?.[0];
+      if (imageUrl) {
+        setImagePreview(imageUrl.replace('https://api.escuelajs.co/api/v1/files/', '/files/'));
+      }
     }
+    
+    // Fetch all products for uniqueness check
+    const fetchAllProducts = async () => {
+      try {
+        const response = await axios.get('/api/v1/products');
+        setAllProducts(response.data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+    fetchAllProducts();
   }, [product]);
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -48,6 +68,7 @@ const AddProduct: React.FC<AddProductProps> = () => {
     if (file) {
       setSelectedFile(file);
       setImagePreview(URL.createObjectURL(file));
+      setErrors(prev => ({ ...prev, image: false }));
     }
   };
 
@@ -61,8 +82,27 @@ const AddProduct: React.FC<AddProductProps> = () => {
   };
 
   const handleProductSubmit = async () => {
-    if (!title || !price || !description) {
-      setToast({ message: "Please fill all fields", type: "error" });
+    const newErrors = {
+      title: !title.trim(),
+      price: !price.trim(),
+      image: !selectedFile && !product?.images
+    };
+    
+    setErrors(newErrors);
+    
+    if (Object.values(newErrors).some(error => error)) {
+      setToast({ message: "Please fill in all required fields", type: "error" });
+      return;
+    }
+
+    // Check for unique product name
+    const isDuplicate = allProducts.some(p => 
+      p.title.toLowerCase() === title.trim().toLowerCase() && 
+      p.id !== product?.id
+    );
+    
+    if (isDuplicate) {
+      setToast({ message: "Product name already exists", type: "error" });
       return;
     }
 
@@ -73,7 +113,7 @@ const AddProduct: React.FC<AddProductProps> = () => {
       try {
         const formData = new FormData();
         formData.append('file', selectedFile);
-        const uploadResponse = await axios.post('https://api.escuelajs.co/api/v1/files/upload', formData);
+        const uploadResponse = await axios.post('/api/v1/files/upload', formData);
         imageUrls = [uploadResponse.data.location];
       } catch (error) {
         setToast({ message: "Failed to upload image", type: "error" });
@@ -99,14 +139,14 @@ const AddProduct: React.FC<AddProductProps> = () => {
       if (product && product.id) {
         // UPDATE
         await axios.put(
-          `https://api.escuelajs.co/api/v1/products/${product.id}`,
+          `/api/v1/products/${product.id}`,
           productData
         );
         setToast({ message: "Product updated successfully", type: "success" });
       } else {
         // CREATE
         await axios.post(
-          `https://api.escuelajs.co/api/v1/products/`,
+          `/api/v1/products/`,
           productData
         );
         setToast({ message: "Product added successfully", type: "success" });
@@ -151,7 +191,19 @@ const AddProduct: React.FC<AddProductProps> = () => {
               </button>
             </div>
           ) : (
-            <div className="relative p-6 text-center border-2 border-gray-300 border-dashed rounded-md">
+            <div className={`relative p-6 text-center border-2 border-dashed rounded-md ${
+              errors.image ? 'border-red-500' : 'border-gray-300'
+            }`}
+                 onDrop={(e) => {
+                   e.preventDefault();
+                   const file = e.dataTransfer.files[0];
+                   if (file) {
+                     setSelectedFile(file);
+                     setImagePreview(URL.createObjectURL(file));
+                   }
+                 }}
+                 onDragOver={(e) => e.preventDefault()}
+                 onDragEnter={(e) => e.preventDefault()}>
               <p className="text-sm text-gray-600">Drag and drop files</p>
               <p className="mb-2 text-sm text-gray-400">or</p>
               <input
@@ -183,10 +235,15 @@ const AddProduct: React.FC<AddProductProps> = () => {
             <input
               type="text"
               value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={(e) => {
+                setTitle(e.target.value);
+                setErrors(prev => ({ ...prev, title: false }));
+              }}
               placeholder="Enter product title"
               className={`w-full px-4 py-2 rounded-md border ${
-                title.trim() !== ""
+                errors.title
+                  ? "border-red-500"
+                  : title.trim() !== ""
                   ? "border-black"
                   : "border-sidePanelBorderColor"
               } focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none`}
@@ -196,11 +253,17 @@ const AddProduct: React.FC<AddProductProps> = () => {
             <label className="block mb-1 text-inputHeaderColor">Price</label>
             <input
               type="number"
+              min="0"
               value={price}
-              onChange={(e) => setPrice(e.target.value)}
+              onChange={(e) => {
+                setPrice(e.target.value);
+                setErrors(prev => ({ ...prev, price: false }));
+              }}
               placeholder="Enter product price"
               className={`w-full px-4 py-2 rounded-md border ${
-                price.trim() !== ""
+                errors.price
+                  ? "border-red-500"
+                  : price.trim() !== ""
                   ? "border-black"
                   : "border-sidePanelBorderColor"
               } focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none`}

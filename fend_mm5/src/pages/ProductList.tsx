@@ -14,6 +14,7 @@ export interface Product {
   description: string;
   price: number;
   images: string[];
+  creationAt?: string;
 }
 
 const ProductList: React.FC = () => {
@@ -23,6 +24,7 @@ const ProductList: React.FC = () => {
   const initialPage = parseInt(searchParams.get("page") || "1", 10);
   const [page, setPage] = useState(initialPage);
   const [products, setProducts] = useState<Product[]>([]);
+  const [totalProducts, setTotalProducts] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [product, setProduct] = useState<Product | null>(null);
   const [toast, setToast] = useState<{
@@ -31,13 +33,19 @@ const ProductList: React.FC = () => {
   } | null>(null);
   const limit = 10;
   const offset = (page - 1) * limit;
+  const totalPages = Math.ceil(totalProducts / limit);
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get(
-        `https://api.escuelajs.co/api/v1/products?offset=${offset}&limit=${limit}`
+      const [productsResponse, totalResponse] = await Promise.all([
+        axios.get(`/api/v1/products?offset=${offset}&limit=${limit}`),
+        axios.get('/api/v1/products')
+      ]);
+      const sortedProducts = productsResponse.data.sort((a: Product, b: Product) => 
+        new Date(b.creationAt || 0).getTime() - new Date(a.creationAt || 0).getTime()
       );
-      setProducts(response.data);
+      setProducts(sortedProducts);
+      setTotalProducts(totalResponse.data.length);
     } catch (error) {
       console.error("Error fetching products:", error);
     }
@@ -61,7 +69,7 @@ const ProductList: React.FC = () => {
   const handleDelete = async () => {
     try {
       await axios.delete(
-        `https://api.escuelajs.co/api/v1/products/${product?.id}`
+        `/api/v1/products/${product?.id}`
       );
       setShowModal(false);
       setToast({ message: "Product deleted successfully", type: "success" });
@@ -110,7 +118,8 @@ const ProductList: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="px-6 pt-4 overflow-y-auto" style={{ height: "calc(100vh - 160px)" }}>
+      <div className="px-6 pt-4 flex flex-col" style={{ height: "calc(100vh - 160px)" }}>
+        <div className="flex-1 overflow-y-auto">
         <table className="min-w-full border-b border-sidePanelBorderColor text-left">
           <thead className="bg-white text-tableTitleColor uppercase text-[14px]">
             <tr className="">
@@ -141,9 +150,12 @@ const ProductList: React.FC = () => {
                 </td>
                 <td className="p-2">
                   <img
-                    src={product.images[0]}
+                    src={product.images[0]?.replace('https://api.escuelajs.co/api/v1/files/', '/files/') || 'https://placehold.co/48x48'}
                     alt={product.title}
                     className="w-12 h-12 object-cover rounded"
+                    onError={(e) => {
+                      e.currentTarget.src = 'https://placehold.co/48x48';
+                    }}
                   />
                 </td>
                 <td className="p-2">{product.title}</td>
@@ -177,9 +189,11 @@ const ProductList: React.FC = () => {
             ))}
           </tbody>
         </table>
+        </div>
 
         {/* Pagination */}
-        <div className="flex justify-between items-center mt-4 px-6 py-3 bg-white border-t border-sidePanelBorderColor sticky bottom-0 z-10">
+        {totalProducts > 10 && (
+          <div className="flex justify-between items-center mt-4 px-6 py-3 bg-white border-t border-sidePanelBorderColor">
           <button
             disabled={page === 1}
             onClick={() => updatePage(page - 1)}
@@ -194,14 +208,14 @@ const ProductList: React.FC = () => {
             </span>
           </button>
           <div className="flex gap-2">
-            {[1, 2, 3, 4, 5].map((p) => (
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
               <button
                 key={p}
                 onClick={() => updatePage(p)}
-                className={`px-3 py-1 rounded-md text-sm ${
+                className={`w-10 h-10 rounded-lg text-sm font-medium ${
                   page === p
-                    ? "bg-blue-600 text-white"
-                    : "border border-gray-300 text-gray-700 hover:bg-gray-100"
+                    ? "text-[#4094F7] border border-gray-300"
+                    : "text-gray-700 border border-gray-300 hover:bg-gray-100"
                 }`}
               >
                 {p}
@@ -209,10 +223,10 @@ const ProductList: React.FC = () => {
             ))}
           </div>
           <button
-            disabled={page === 5}
+            disabled={page === totalPages}
             onClick={() => updatePage(page + 1)}
             className={`px-4 py-2 border rounded-md text-sm ${
-              page === 5 
+              page === totalPages 
                 ? "text-gray-400 cursor-not-allowed" 
                 : "text-textColor hover:bg-gray-200"
             }`}
@@ -222,6 +236,7 @@ const ProductList: React.FC = () => {
             </span>
           </button>
         </div>
+        )}
       </div>
       <DeleteModal
         isOpen={showModal}
