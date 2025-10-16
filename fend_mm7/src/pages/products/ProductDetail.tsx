@@ -97,30 +97,32 @@ const ProductDetail = () => {
         </div>
 
         {/* Product Display */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 justify-between">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8">
           {/* Thumbnails */}
-          <div className="hidden lg:flex lg:col-span-2 flex-col gap-4 h-[800px] justify-between">
-            {images.slice(0, 3).map((image, index) => (
-              <div
-                key={index}
-                className={`rounded-[20px] cursor-pointer flex-1 overflow-hidden ${
-                  selectedImageIndex === index
-                    ? "border border-gray-800"
-                    : "hover:border hover:border-gray-400"
-                }`}
-                onClick={() => setSelectedImageIndex(index)}
-              >
-                <img
-                  src={image}
-                  alt={`${data.name} thumbnail ${index + 1}`}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
+          <div className="hidden lg:flex lg:col-span-2 flex-col gap-4">
+            <div className="w-full flex flex-col gap-[14px]">
+              {images.slice(0, 3).map((image, index) => (
+                <div
+                  key={index}
+                  className={`aspect-[3/4] rounded-[20px] cursor-pointer overflow-hidden ${
+                    selectedImageIndex === index
+                      ? "border border-gray-800"
+                      : "hover:border hover:border-gray-400"
+                  }`}
+                  onClick={() => setSelectedImageIndex(index)}
+                >
+                  <img
+                    src={image}
+                    alt={`${data.name} thumbnail ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Main Product Image */}
-          <div className="lg:col-span-4 h-[800px] rounded-[20px] overflow-hidden">
+          <div className="lg:col-span-4 aspect-[3/4] rounded-[20px] overflow-hidden bg-[#F0EEED]">
             <img
               src={images[selectedImageIndex]}
               alt={data.name}
@@ -129,7 +131,7 @@ const ProductDetail = () => {
           </div>
 
           {/* Product Details */}
-          <div className="lg:col-span-6 flex flex-col gap-6 text-subtitleColor lg:h-[800px]">
+          <div className="lg:col-span-6 flex flex-col gap-6 text-subtitleColor">
             <h1 className="text-3xl md:text-[32px] font-alfa-slab text-black">
               {data.name}
             </h1>
@@ -143,75 +145,46 @@ const ProductDetail = () => {
               <ul className="space-y-1">
                 <li className="flex items-center gap-2">
                   <Check size={18} className="text-[#4f4631]" />
-                  <span>Premium 100% Cotton fabric for all-day comfort</span>
+                  <span>Premium 100% Cotton fabric</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <Check size={18} className="text-[#4f4631]" />
-                  <span>
-                    High-quality screen-printed graphic for long-lasting
-                    durability
-                  </span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check size={18} className="text-[#4f4631]" />
-                  <span>
-                    Classic crew neck and short sleeves for a timeless fit
-                  </span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check size={18} className="text-[#4f4631]" />
-                  <span>Available in Black, White, and Navy Blue</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check size={18} className="text-[#4f4631]" />
-                  <span>Unisex design, suitable for both men and women</span>
+                  <span>High-quality screen-printed graphic</span>
                 </li>
               </ul>
             </div>
-            {/* Divider */}
-            <div className="h-px w-full bg-dividerColor bg-opacity-30 "></div>
+
+            <div className="h-px w-full bg-dividerColor bg-opacity-30"></div>
 
             <div>
               <h3 className="font-medium mb-3">Select Colors</h3>
               <div className="flex gap-3">
                 <button
-                  className={`w-10 h-10 rounded-full bg-[#4f4631] flex items-center justify-center cursor-pointer`}
+                  className="w-10 h-10 rounded-full bg-[#4f4631] flex items-center justify-center cursor-pointer"
                   onClick={() => setSelectedColor("olive")}
-                  aria-label="Olive color"
                 >
-                  {selectedColor === "olive" && (
-                    <Check size={16} className="text-white" />
-                  )}
+                  {selectedColor === "olive" && <Check size={16} className="text-white" />}
                 </button>
                 <button
-                  className={`w-10 h-10 rounded-full bg-[#314f4a] flex items-center justify-center cursor-pointer`}
+                  className="w-10 h-10 rounded-full bg-[#314f4a] flex items-center justify-center cursor-pointer"
                   onClick={() => setSelectedColor("teal")}
-                  aria-label="Teal color"
                 >
-                  {" "}
-                  {selectedColor === "teal" && (
-                    <Check size={16} className="text-white" />
-                  )}
+                  {selectedColor === "teal" && <Check size={16} className="text-white" />}
                 </button>
                 <button
-                  className={`w-10 h-10 rounded-full bg-[#31344f] flex items-center justify-center cursor-pointer`}
+                  className="w-10 h-10 rounded-full bg-[#31344f] flex items-center justify-center cursor-pointer"
                   onClick={() => setSelectedColor("navy")}
-                  aria-label="Navy color"
                 >
-                  {" "}
-                  {selectedColor === "navy" && (
-                    <Check size={16} className="text-white" />
-                  )}
+                  {selectedColor === "navy" && <Check size={16} className="text-white" />}
                 </button>
               </div>
             </div>
 
-            {/* Divider */}
-            <div className="h-px w-full bg-dividerColor bg-opacity-30 "></div>
+            <div className="h-px w-full bg-dividerColor bg-opacity-30"></div>
 
             <div>
               <h3 className="font-medium mb-3">Choose Size</h3>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex gap-2">
                 {["Small", "Medium", "Large", "X-Large"].map((size) => (
                   <button
                     key={size}
@@ -227,15 +200,14 @@ const ProductDetail = () => {
                 ))}
               </div>
             </div>
-            {/* Divider */}
-            <div className="h-px w-full bg-dividerColor bg-opacity-30 "></div>
+
+            <div className="h-px w-full bg-dividerColor bg-opacity-30"></div>
 
             <div className="flex gap-4 items-center">
               <div className="flex items-center bg-[#F0F0F0] rounded-[62px]">
                 <button
                   className={`px-3 py-3 cursor-pointer ${quantity === 1 ? 'text-gray-400' : 'text-black'}`}
                   onClick={decrementQuantity}
-                  aria-label="Decrease quantity"
                 >
                   <Minus size={18} />
                 </button>
@@ -243,7 +215,6 @@ const ProductDetail = () => {
                 <button
                   className="px-3 py-3 cursor-pointer"
                   onClick={incrementQuantity}
-                  aria-label="Increase quantity"
                 >
                   <Plus size={18} />
                 </button>

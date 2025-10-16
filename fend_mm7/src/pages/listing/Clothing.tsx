@@ -87,70 +87,64 @@ const ClothingCatalog: React.FC = () => {
           </h1>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
-            {/* Row 1 - Mobile: Full width, Tablet: 1/2 width, Desktop: 2/5 width */}
-            <div className="sm:col-span-1 md:col-span-2 bg-white rounded-[12px] sm:rounded-[16px] md:rounded-[20px] overflow-hidden mb-4 sm:mb-0">
-              <div className="relative rounded-xl sm:rounded-2xl overflow-hidden h-48 sm:h-full">
-                {/* Background image */}
+            {/* Casual */}
+            <div className="sm:col-span-1 md:col-span-2 bg-white rounded-[12px] sm:rounded-[16px] md:rounded-[20px] overflow-hidden">
+              <div className="relative h-48 sm:h-60 md:h-72">
                 <img
                   src={styleCategories[0].image || "/placeholder.svg"}
                   alt={styleCategories[0].name}
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className="w-full h-full object-cover"
                 />
-                {/* Text on top */}
-                <div className="relative z-10 p-4">
-                  <h2 className="text-xl sm:text-2xl font-bold text-black">
+                <div className="absolute bottom-4 left-4 bg-white bg-opacity-90 px-3 py-1 rounded-lg">
+                  <h2 className="text-lg sm:text-xl font-bold text-black">
                     {styleCategories[0].name}
                   </h2>
                 </div>
               </div>
             </div>
 
-            <div className="sm:col-span-1 md:col-span-3 bg-white rounded-[12px] sm:rounded-[16px] md:rounded-[20px] overflow-hidden mb-4 sm:mb-0">
-              <div className="relative rounded-xl sm:rounded-2xl overflow-hidden h-48 sm:h-60">
-                {/* Background image */}
+            {/* Formal */}
+            <div className="sm:col-span-1 md:col-span-3 bg-white rounded-[12px] sm:rounded-[16px] md:rounded-[20px] overflow-hidden">
+              <div className="relative h-48 sm:h-60 md:h-72">
                 <img
                   src={styleCategories[1].image || "/placeholder.svg"}
                   alt={styleCategories[1].name}
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className="w-full h-full object-cover"
                 />
-                {/* Text on top */}
-                <div className="relative z-10 p-4">
-                  <h2 className="text-xl sm:text-2xl font-bold text-black">
+                <div className="absolute bottom-4 left-4 bg-white bg-opacity-90 px-3 py-1 rounded-lg">
+                  <h2 className="text-lg sm:text-xl font-bold text-black">
                     {styleCategories[1].name}
                   </h2>
                 </div>
               </div>
             </div>
 
-            {/* Row 2 - Mobile: Full width, Tablet: 1/2 width, Desktop: 3/5 width */}
-            <div className="sm:col-span-1 md:col-span-3 bg-white rounded-[12px] sm:rounded-[16px] md:rounded-[20px] overflow-hidden mb-4 sm:mb-0">
-              <div className="relative rounded-xl sm:rounded-2xl overflow-hidden h-48 sm:h-60">
-                {/* Background image */}
+            {/* Party */}
+            <div className="sm:col-span-1 md:col-span-3 bg-white rounded-[12px] sm:rounded-[16px] md:rounded-[20px] overflow-hidden">
+              <div className="relative h-48 sm:h-60 md:h-72">
                 <img
                   src={styleCategories[2].image || "/placeholder.svg"}
                   alt={styleCategories[2].name}
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className="w-full h-full object-cover"
                 />
-                {/* Text on top */}
-                <div className="relative z-10 p-4">
-                  <h2 className="text-xl sm:text-2xl font-bold text-black">
+                <div className="absolute bottom-4 left-4 bg-white bg-opacity-90 px-3 py-1 rounded-lg">
+                  <h2 className="text-lg sm:text-xl font-bold text-black">
                     {styleCategories[2].name}
                   </h2>
                 </div>
               </div>
             </div>
 
+            {/* Gym */}
             <div className="sm:col-span-1 md:col-span-2 bg-white rounded-[12px] sm:rounded-[16px] md:rounded-[20px] overflow-hidden">
-              <div className="relative rounded-xl sm:rounded-2xl overflow-hidden h-48 sm:h-60">
-                {/* Background image */}
+              <div className="relative h-48 sm:h-60 md:h-72">
                 <img
                   src={styleCategories[3].image || "/placeholder.svg"}
                   alt={styleCategories[3].name}
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className="w-full h-full object-cover"
                 />
-                {/* Text on top */}
-                <div className="relative z-10 p-4">
-                  <h2 className="text-xl sm:text-2xl font-bold text-black">
+                <div className="absolute bottom-4 left-4 bg-white bg-opacity-90 px-3 py-1 rounded-lg">
+                  <h2 className="text-lg sm:text-xl font-bold text-black">
                     {styleCategories[3].name}
                   </h2>
                 </div>

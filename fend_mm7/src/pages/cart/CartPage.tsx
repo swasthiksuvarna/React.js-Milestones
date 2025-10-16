@@ -57,7 +57,7 @@ const CartPage: React.FC = () => {
             className="w-full h-12 pl-12 pr-28 bg-transparent border-none rounded-full focus:outline-none"
           />
         </div>
-        <Button className="bg-black text-white rounded-full px-10 py-4 text-sm hover:bg-subtitleColor w-[30%]">
+        <Button className="bg-black text-white rounded-full px-6 sm:px-10 py-4 text-sm hover:bg-subtitleColor flex-shrink-0">
           Apply
         </Button>
       </div>

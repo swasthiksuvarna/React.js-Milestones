@@ -11,59 +11,40 @@ const HomePage = () => {
   return (
     <main className="min-h-screen flex flex-col font-inter">
       {/* Hero Section */}
-      <section className="relative min-h-[calc(100vh+100px)] sm:min-h-[calc(100vh+110px)] md:min-h-[calc(100vh+120px)]">
-        {/* Full background image */}
-        <div className="absolute inset-0 w-full h-full z-0">
-          <img
-            src="/bg2.png"
-            alt="Fashion background"
-            className="object-cover w-full h-full"
-          />
-          {/* Dark overlay for better text readability */}
-          {/* <div className="absolute inset-0 bg-black bg-opacity-40"></div> */}
-        </div>
-        <div className="container mx-auto px-3 sm:px-4 relative flex flex-col md:flex-row min-h-[calc(100vh+100px)] sm:min-h-[calc(100vh+110px)] md:min-h-[calc(100vh+120px)]">
-          <div className="relative z-10 w-full md:w-3/4 flex flex-col justify-center pt-32 sm:pt-0">
-            <h1 className="font-alfa-slab font-[400] text-[24px] sm:text-[48px] md:text-[64px] leading-tight md:leading-none mb-4 md:mb-6 text-black text-center sm:text-left">
+      <section 
+        className="relative min-h-screen bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: 'url(/bg2.png)' }}
+      >
+        <div className="container mx-auto px-4 relative flex items-center min-h-screen">
+          <div className="w-full max-w-2xl">
+            <h1 className="font-alfa-slab font-[400] text-[28px] sm:text-[40px] md:text-[48px] lg:text-[64px] leading-tight mb-4 md:mb-6 text-black text-center sm:text-left">
               FIND CLOTHES THAT MATCH YOUR STYLE PERFECTLY
             </h1>
-            <p className="font-inter text-subtitleColor mb-6 md:mb-8 max-w-xl text-[14px] sm:text-[16px] text-center sm:text-left">
-              Browse through our diverse range of meticulously crafted garments,
-              designed to bring out your individuality and cater to your sense of style.
+            <p className="font-inter text-subtitleColor mb-6 md:mb-8 text-[14px] sm:text-[16px] text-center sm:text-left">
+              Browse through our diverse range of meticulously crafted garments, designed to bring out your individuality and cater to your sense of style.
             </p>
-            <div className="text-center sm:text-left">
-              <Button className="bg-black text-white rounded-full px-18 py-4 text-sm hover:bg-subtitleColor">
+            <div className="text-center sm:text-left mb-8 sm:mb-12 md:mb-16">
+              <Button className="bg-black text-white rounded-full px-8 py-4 text-sm hover:bg-subtitleColor">
                 Shop Now
               </Button>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center mt-8 sm:mt-12 md:mt-16 gap-6 sm:gap-0">
-              <div className="text-center sm:text-left">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-4 text-center sm:text-left">
+              <div>
                 <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black">200+</h3>
                 <p className="text-subtitleColor text-sm sm:text-base">International Brands</p>
               </div>
-
-              {/* Divider line - hidden on mobile */}
-              <div className="hidden sm:block h-12 sm:h-16 w-px bg-dividerColor bg-opacity-30 mx-4 sm:mx-6"></div>
-
-              <div className="text-center sm:text-left">
+              <div>
                 <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black">2,000+</h3>
                 <p className="text-subtitleColor text-sm sm:text-base">High-Quality Products</p>
               </div>
-
-              {/* Divider line - hidden on mobile */}
-              <div className="hidden sm:block h-12 sm:h-16 w-px bg-dividerColor bg-opacity-30 mx-4 sm:mx-6"></div>
-
-              <div className="text-center sm:text-left">
+              <div>
                 <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black">30,000+</h3>
                 <p className="text-subtitleColor text-sm sm:text-base">Happy Customers</p>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Keep this div for layout consistency */}
-        <div className="relative z-10 w-full md:w-1/2"></div>
       </section>
       {/* Brands Section */}
       <section className="bg-black text-white py-6 sm:py-8">

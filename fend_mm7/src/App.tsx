@@ -106,41 +106,39 @@ const Header = () => {
         </div>
       </div>
       <nav className="py-4 sm:py-6 bg-white">
-        <div className="container mx-auto px-3 sm:px-4 flex flex-wrap items-center justify-between">
+        <div className="container mx-auto px-4 flex items-center justify-between">
         {/* Left side: Logo and Links */}
-        <div className="flex items-center gap-4 sm:gap-8 md:gap-12 flex-shrink-0">
+        <div className="flex items-center gap-4 sm:gap-8 md:gap-12">
           <Link
             to="/"
-            className="font-alfa-slab text-2xl sm:text-[28px] md:text-[32px] font-normal leading-none tracking-normal align-middle"
+            className="font-alfa-slab text-xl sm:text-2xl md:text-[32px] font-normal"
           >
             FAKESTORE
           </Link>
-          <div className="hidden md:flex items-center gap-4 lg:gap-8 font-inter">
+          <div className="hidden lg:flex items-center gap-4 lg:gap-8 font-inter">
             <div className="relative group">
-              <Link to="/shop" className="font-inter font-normal text-base leading-none tracking-normal">
+              <Link to="/shop" className="font-inter font-normal text-base">
                 Shop
               </Link>
               <img src={dropdownSvg} alt="Dropdown" className="inline-block ml-1 h-3 w-3" />
             </div>
-            <Link to="/sale" className="font-inter font-normal text-base leading-none tracking-normal">
+            <Link to="/sale" className="font-inter font-normal text-base">
               On Sale
             </Link>
-            <Link to="/new-arrivals" className="font-inter font-normal text-base leading-none tracking-normal">
+            <Link to="/new-arrivals" className="font-inter font-normal text-base">
               New Arrivals
             </Link>
-            <Link to="/brands" className="font-inter font-normal text-base leading-none tracking-normal">
+            <Link to="/brands" className="font-inter font-normal text-base">
               Brands
             </Link>
           </div>
         </div>
 
         {/* Right side: Search and Icons */}
-        <div className="flex items-center gap-2 sm:gap-4 flex-grow ml-2 sm:ml-4 md:ml-8 mt-2 sm:mt-0">
+        <div className="flex items-center gap-2 sm:gap-4">
           {/* Search bar */}
-          <div className="relative flex items-center bg-gray-100 rounded-full py-4 px-2 sm:px-4 py-2 flex-grow max-w-[56rem] sm:max-w-[55.5rem]">
-
-            {/* <div className="relative flex items-center bg-gray-100 rounded-full px-2 sm:px-4 py-2 flex-grow max-w-xs sm:max-w-xl md:max-w-3xl"> */}
-            <Search className="h-4 w-4 sm:h-5 sm:w-5 text-gray-500" />
+          <div className="relative flex items-center bg-gray-100 rounded-full px-4 py-2 w-full max-w-xs sm:max-w-md">
+            <Search className="h-4 w-4 text-gray-500" />
             <input
               type="text"
               placeholder="Search for products..."
@@ -150,7 +148,7 @@ const Header = () => {
 
           {/* Icons */}
           <button
-            className="p-1 sm:p-2 cursor-pointer"
+            className="p-2 cursor-pointer"
             onClick={() => {
               navigate("/cart");
             }}
@@ -158,7 +156,7 @@ const Header = () => {
             <img src={ShoppingCart} alt="Shopping Cart" className="h-5 w-5 sm:h-6 sm:w-6" />
           </button>
           <button
-            className="p-1 sm:p-2 cursor-pointer"
+            className="p-2 cursor-pointer"
             onClick={handleProfileClick}
             aria-label="Open profile"
           >
@@ -176,9 +174,9 @@ const Footer = () => {
   return (
     <footer className="mt-auto bg-[#F0F0F0] font-inter">
       <div className="container mx-auto px-3 sm:px-4 py-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-8 lg:flex lg:justify-between mb-8 sm:mb-10 md:mb-12">
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-10 md:mb-12">
           {/* Store Info */}
-          <div className="sm:col-span-2 md:col-span-1 lg:col-span-1">
+          <div className="col-span-2 sm:col-span-4 lg:col-span-2 text-center sm:text-left">
             <h2 className="text-2xl sm:text-3xl mb-4 font-alfa-slab">FAKESTORE</h2>
             <p className="text-gray-600 mb-4 text-sm sm:text-base">
               We have clothes that suits your style 
@@ -189,7 +187,7 @@ const Footer = () => {
             </p>
 
             {/* Social Media Icons */}
-            <div className="flex space-x-3 sm:space-x-4 mt-8">
+            <div className="flex justify-center sm:justify-start space-x-3 sm:space-x-4 mt-8">
               <a href="#" className="w-7 h-7 bg-white rounded-full flex items-center justify-center">
                 <FaTwitter className="text-gray-800 text-sm" />
               </a>
@@ -207,7 +205,7 @@ const Footer = () => {
 
           {/* Footer Links */}
           {Object.values(footerLinks).map((section, index) => (
-            <div key={section.title} className="mt-6 sm:mt-0">
+            <div key={section.title} className="lg:col-span-1 text-center sm:text-left">
                 <h3 className="font-medium mb-3 sm:mb-4 text-sm sm:text-base">{section.title}</h3>
                 <ul className="space-y-2 sm:space-y-4">
                   {section.links.map((link) => (
