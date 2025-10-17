@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Milestone 1 - Tailwind</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'roboto': ['Roboto', 'sans-serif'],
+          },
+          colors: {
+            primary: '#111b47',
+            'nav-text': '#505f98',
+            'heading': '#37447e',
+            'title': '#091133',
+            'subtitle': '#505F98',
+            'subtitle2': '#5D6970',
+            'subtitle3': '#37447E',
+            'dollar': '#222F65',
+            'footer-company': '#939EA4',
+            'footer-bg': '#E7ECFF'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-image: url('./images/backgroundImage.png');
+      background-repeat: no-repeat;
+      background-position: right top;
+      background-size: auto 110vh;
+    }
+    
+    @media (max-width: 1200px) {
+      .hero-bg::before {
+        opacity: 0.3;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      body {
+        background-image: none;
+      }
+      .hero-bg::before {
+        opacity: 0;
+      }
+    }
+    @media (min-width: 1441px) {
+      .hero-bg::before {
+        background-size: auto 80% !important;
+      }
+    }
+    
+    @media (min-width: 1600px) {
+      .hero-bg::before {
+        background-size: auto 90% !important;
+      }
+    }
+    .hero-bg {
+      position: relative;
+    }
+    
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100%;
+      background-image: url('./images/section1.png');
+      background-repeat: no-repeat;
+      background-position: right top;
+      background-size: clamp(auto 50%, auto 100vw, auto 120%);
+      opacity: clamp(0, 100vw / 1000, 1);
+      z-index: -1;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+  </style>
+</head>
+<body class="font-roboto bg-white overflow-x-hidden">
+  
+  <!-- Section 1 - Hero -->
+  <section class="min-h-screen">
+    <div class="container mx-auto px-0">
+      
+      <!-- Navbar -->
+      <nav class="flex items-center justify-between py-5 px-[9%] mb-2 md:mb-0">
+        <!-- Mobile Menu Button -->
+        <button class="md:hidden text-heading" onclick="toggleMenu()">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+        
+        <!-- Navigation Links -->
+        <div class="hidden md:flex space-x-12">
+          <a href="#" class="text-nav-text text-sm font-normal">Home</a>
+          <a href="#" class="text-nav-text text-sm font-normal">About</a>
+          <a href="#" class="text-nav-text text-sm font-normal">Contact</a>
+        </div>
+        
+        <!-- Brand -->
+        <a href="#" class="text-heading text-[26px] font-black px-8">Landing</a>
+        
+        <!-- Buy Now Button -->
+        <button class="bg-primary text-white text-xs font-medium rounded-sm px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-2 lg:w-[11.11vw] lg:h-[1.81vw] hover:bg-opacity-90 flex items-center justify-center">
+          Buy Now
+        </button>
+      </nav>
+      
+      <!-- Mobile Dropdown Menu -->
+      <div id="mobileMenu" class="hidden md:hidden bg-white shadow-lg px-[9%] py-1">
+        <a href="#" class="block text-nav-text text-sm font-normal py-1">Home</a>
+        <a href="#" class="block text-nav-text text-sm font-normal py-1">About</a>
+        <a href="#" class="block text-nav-text text-sm font-normal py-1">Contact</a>
+      </div>
+    </div>
+    
+    <!-- Mobile Image - Between header and content -->
+    <div class="w-screen md:hidden pt-4">
+      <img src="./images/section1.png" class="w-4/5 ml-auto" alt="Hero Image">
+    </div>
+      
+    <!-- Hero Content -->
+    <div class="bg-no-repeat bg-right hero-bg -mt-2 md:mt-32 min-h-[750px]">
+      <div class="container mx-auto px-0">
+        <div class="flex flex-col md:flex-row items-center mt-16 px-[9%] md:px-[9%] justify-center">
+        <div class="w-full md:w-1/2 order-2 md:order-1">
+          <div class="flex flex-col text-center md:text-left py-16 md:pr-40 w-full md:w-[760px] lg:w-[760px] xl:w-[760px] sm:w-[610px] mx-auto md:mx-0">
+            <h1 class="font-roboto font-medium text-[50px] leading-[66px] tracking-[1px] mb-6 md:text-[50px] md:leading-[66px] sm:text-[40px] sm:leading-[52px] text-title w-full">
+              Introduce Your Product Quickly & Effectively
+            </h1>
+            <p class="font-roboto font-normal text-[18px] leading-[30px] tracking-[-0.5px] xl:tracking-normal text-justify mb-4 w-full md:text-[18px] md:leading-[30px] sm:text-[16px] sm:leading-[26px] text-subtitle">
+              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean<br>commodo ligula eget dolor. Aenean massa. Cum sociis natoque<br>penatibus et magnis dis parturient montes, nascetur ridiculus
+            </p>
+            <p class="font-roboto font-normal text-[18px] leading-[30px] tracking-[-0.5px] xl:tracking-normal text-justify mb-20 w-full md:text-[18px] md:leading-[30px] sm:text-[16px] sm:leading-[26px] text-subtitle">
+              mus. Donec quam felis, ultricies nec, pellentesque eu, pretium<br>quis, sem. Nulla consequat massa quis enim.
+            </p>
+            <div class="flex space-x-4 justify-center md:justify-start">
+              <button class="bg-primary text-white font-medium rounded-sm border-2 border-primary hover:bg-opacity-90 w-[189px] h-[36px]">
+                Purchase UI Kit
+              </button>
+              <button class="text-primary font-medium rounded-sm border-2 border-primary bg-transparent hover:bg-primary hover:text-white w-[189px] h-[36px]">
+                Learn More
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="md:w-1/2 order-1 md:order-2 hidden md:block">
+          <!-- Empty div for desktop layout, hidden on mobile -->
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2 -->
+  <section class="py-20">
+    <div class="container mx-auto px-0">
+      <div class="flex flex-col md:flex-row items-center px-[9%]">
+      <div class="md:w-1/2 xl:w-3/5 order-2 md:order-1">
+        <div class="text-center md:text-left py-20 md:pr-20">
+          <h2 class="text-title text-[3rem] xl:text-[36px] font-medium xl:leading-[48px] tracking-normal mb-6">Light, Fast & Powerful</h2>
+            <p class="text-subtitle text-lg xl:text-base font-normal xl:leading-[26px] tracking-normal text-justify mb-4">
+              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+            </p>
+            <p class="text-subtitle text-lg xl:text-base font-normal xl:leading-[26px] tracking-normal text-justify mb-8">
+              mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+            </p>
+            <div class="grid grid-cols-2 gap-8">
+              <div class="pt-12">
+                <img src="./images/section2Icon.svg" class="w-9 h-9 mb-3" alt="Icon">
+                <h3 class="text-title text-xl xl:text-base font-medium xl:leading-[26px] tracking-normal mb-3">Title Goes Here</h3>
+                <p class="text-subtitle2 text-lg xl:text-xs xl:leading-[18px] tracking-normal">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
+              </div>
+              <div class="pt-12">
+                <img src="./images/section2Icon.svg" class="w-9 h-9 mb-3" alt="Icon">
+                <h3 class="text-title text-xl xl:text-base font-medium xl:leading-[26px] tracking-normal mb-3">Title Goes Here</h3>
+                <p class="text-subtitle2 text-lg xl:text-xs xl:leading-[18px] tracking-normal">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="md:w-1/2 xl:w-2/5 order-1 md:order-2 flex justify-end -mt-8">
+          <img src="./images/section2img.png" class="w-full md:h-full object-contain md:object-cover" alt="Section 2 Image">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3 -->
+  <section class="py-20 flex items-center">
+    <div class="container mx-auto px-0">
+      <div class="flex flex-col md:flex-row items-center px-[9%]">
+        <div class="md:w-3/5 flex justify-center md:justify-start">
+          <img src="./images/section3.png" class="w-3/4 mt-16" alt="Section 3 Image">
+        </div>
+        <div class="md:w-2/5">
+          <div class="text-center md:text-left py-20">
+            <h2 class="text-title text-[3rem] xl:text-[36px] font-medium xl:leading-[48px] tracking-normal mb-6">Light, Fast & Powerful</h2>
+            <p class="text-subtitle text-lg xl:text-base font-normal xl:leading-[26px] tracking-normal text-justify mb-4">
+              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+            </p>
+            <p class="text-subtitle text-lg xl:text-base font-normal xl:leading-[26px] tracking-normal text-justify">
+              mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4 -->
+  <section class="py-20 flex items-center">
+    <div class="container mx-auto px-0">
+      <div class="flex flex-col md:flex-row items-center px-[9%]">
+        <div class="md:w-3/5 flex justify-center md:justify-start">
+          <img src="./images/section4.png" class="w-3/4" alt="Section 4 Image">
+        </div>
+        <div class="md:w-2/5">
+          <div class="text-center md:text-left py-20">
+            <h2 class="text-title text-[3rem] xl:text-[36px] font-medium xl:leading-[48px] tracking-normal mb-6">Light, Fast & Powerful</h2>
+            <p class="text-subtitle text-lg xl:text-base font-normal xl:leading-[26px] tracking-normal text-justify mb-4">
+              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+            </p>
+            <p class="text-subtitle text-lg xl:text-base font-normal xl:leading-[26px] tracking-normal text-justify">
+              mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5 -->
+  <section class="py-20 flex items-center">
+    <div class="container mx-auto px-0">
+      <div class="flex flex-col md:flex-row items-center px-[9%]">
+        <div class="md:w-3/5 flex justify-center md:justify-start">
+          <img src="./images/section5.png" class="w-3/4" alt="Section 5 Image">
+        </div>
+        <div class="md:w-2/5">
+          <div class="text-center md:text-left py-20">
+            <h2 class="text-title text-[3rem] xl:text-[36px] font-medium xl:leading-[48px] tracking-normal mb-6">Light, Fast & Powerful</h2>
+            <p class="text-subtitle text-lg xl:text-base font-normal xl:leading-[26px] tracking-normal text-justify mb-4">
+              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+            </p>
+            <p class="text-subtitle text-lg xl:text-base font-normal xl:leading-[26px] tracking-normal text-justify mb-8">
+              mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+            </p>
+            <button class="bg-primary text-white font-medium text-sm leading-6 tracking-normal text-center rounded-sm w-[150px] h-[32px] hover:bg-opacity-90">
+              Purchase Now
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Curve for Section 6 -->
+  <div class="w-full h-20 bg-white relative z-10" style="border-radius: 0 0 50% 50%;"></div>
+  
+  <!-- Section 6 - Pricing -->
+<section class="py-20 pb-20 bg-center -mt-20 relative z-0" style="background-size: 100%; background-color: #e7ecff90;">
+    <div class="container mx-auto px-[5%] pt-36">
+      <div class="flex flex-col items-center text-center">
+        <h2 class="text-title text-[36px] font-medium leading-[48px] tracking-normal text-center mb-6">A Price To Suit Everyone</h2>
+        <p class="text-subtitle text-basSamyake font-normal leading-[26px] tracking-normal text-center w-1/2 mb-8">
+          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+        </p>
+        <p class="text-dollar text-[50px] font-medium leading-[66px] tracking-[1px] text-center mb-0">$40</p>
+        <p class="text-subtitle3 text-base font-normal leading-[26px] tracking-normal text-center mb-20">UI Design Kit</p>
+        <p class="text-subtitle2 text-sm font-normal leading-6 tracking-normal text-center mb-6">See, One price. Simple.</p>
+        <button class="bg-primary text-white font-medium text-sm leading-6 tracking-normal text-center rounded-sm w-[189px] h-6 hover:bg-opacity-90">
+          Purchase Now
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="hidden md:block" style="background: #E7ECFF;">
+    <div class="container mx-auto">
+      <div class="py-8 text-center">
+        <!-- Top Row -->
+        <div class="flex items-center justify-between mb-8">
+          <p class="text-footer-company text-sm font-medium leading-6 tracking-normal pl-[9%]">© 2023 Your Company.</p>
+          <p class="text-subtitle3 text-[26px] font-black leading-[38px] tracking-normal text-center flex-1">Landing</p>
+          <div class="pr-[9%]">
+            <button class="bg-primary text-white font-medium text-xs leading-[18px] tracking-normal text-center rounded-sm w-[7.57vw] h-[1.81vw] hover:bg-opacity-90">
+              Purchase Now
+            </button>
+          </div>
+        </div>
+        
+        <!-- Horizontal Line -->
+        <div class="border-b border-gray-300 ml-[9%] mr-[9%] mb-8"></div>
+        
+        <!-- Bottom Row -->
+        <div class="flex items-center justify-between">
+          <div class="flex space-x-8 pl-[9%]">
+            <a href="#" class="text-footer-company text-sm font-normal leading-6 tracking-normal">Home</a>
+            <a href="#" class="text-footer-company text-sm font-normal leading-6 tracking-normal">About</a>
+            <a href="#" class="text-footer-company text-sm font-normal leading-6 tracking-normal">Contact</a>
+          </div>
+          <div class="flex space-x-8 pr-[9%]">
+            <a href="#"><img src="./images/facebook.svg" alt="Facebook" class="w-4 h-4 hover:scale-110 transition-transform"></a>
+            <a href="#"><img src="./images/linkedin.svg" alt="LinkedIn" class="w-5 h-5 hover:scale-110 transition-transform"></a>
+            <a href="#"><img src="./images/twitter.svg" alt="Twitter" class="w-5 h-5 hover:scale-110 transition-transform"></a>
+            <a href="#"><img src="./images/youtube.svg" alt="YouTube" class="w-5 h-5 hover:scale-110 transition-transform"></a>
+            <a href="#"><img src="./images/Instagram.svg" alt="Instagram" class="w-5 h-5 hover:scale-110 transition-transform"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+    }
+  </script>
+
+</body>
+</html>

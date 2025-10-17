@@ -27,6 +27,7 @@ const ProductList: React.FC = () => {
   const [totalProducts, setTotalProducts] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState(false);
   const [toast, setToast] = useState<{
     message: string;
     type: "success" | "error";
@@ -36,6 +37,7 @@ const ProductList: React.FC = () => {
   const totalPages = Math.ceil(totalProducts / limit);
 
   const fetchProducts = async () => {
+    setLoading(true);
     try {
       const [productsResponse, totalResponse] = await Promise.all([
         axios.get(`/api/v1/products?offset=${offset}&limit=${limit}`),
@@ -48,6 +50,8 @@ const ProductList: React.FC = () => {
       setTotalProducts(totalResponse.data.length);
     } catch (error) {
       console.error("Error fetching products:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -137,56 +141,83 @@ const ProductList: React.FC = () => {
             </tr>
           </thead>
           <tbody className="text-textColor text-[14px]">
-            {products.map((product: Product) => (
-              <tr
-                key={product.id}
-                className="border-t border-sidePanelBorderColor"
-              >
-                <td className="p-2 pl-5">
-                  <input
-                    type="checkbox"
-                    className="w-4 h-4 border border-gray-400 rounded-sm"
-                  />
-                </td>
-                <td className="p-2">
-                  <img
-                    src={product.images[0]?.replace('https://api.escuelajs.co/api/v1/files/', '/files/') || 'https://placehold.co/48x48'}
-                    alt={product.title}
-                    className="w-12 h-12 object-cover rounded"
-                    onError={(e) => {
-                      e.currentTarget.src = 'https://placehold.co/48x48';
-                    }}
-                  />
-                </td>
-                <td className="p-2">{product.title}</td>
-                <td className="p-2">{product.description.split(".")[0]}</td>
-                <td className="p-2 pr-30">${product.price}</td>
-                <td className="p-2 pr-5 flex gap-2">
-                  <button
-                    className="group"
-                    onClick={() => handleDeleteClick(product)}
-                  >
-                    <img
-                      src={DeleteIcon}
-                      alt="Delete"
-                      className="w-10 h-10 group-hover:scale-120 "
+            {loading ? (
+              // Shimmer skeleton rows
+              Array.from({ length: limit }).map((_, index) => (
+                <tr key={index} className="border-t border-sidePanelBorderColor">
+                  <td className="p-2 pl-5">
+                    <div className="w-4 h-4 shimmer rounded-sm"></div>
+                  </td>
+                  <td className="p-2">
+                    <div className="w-12 h-12 shimmer rounded"></div>
+                  </td>
+                  <td className="p-2">
+                    <div className="w-32 h-4 shimmer rounded"></div>
+                  </td>
+                  <td className="p-2">
+                    <div className="w-48 h-4 shimmer rounded"></div>
+                  </td>
+                  <td className="p-2 pr-30">
+                    <div className="w-16 h-4 shimmer rounded"></div>
+                  </td>
+                  <td className="p-2 pr-5 flex gap-2">
+                    <div className="w-10 h-10 shimmer rounded"></div>
+                    <div className="w-10 h-10 shimmer rounded"></div>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              products.map((product: Product) => (
+                <tr
+                  key={product.id}
+                  className="border-t border-sidePanelBorderColor"
+                >
+                  <td className="p-2 pl-5">
+                    <input
+                      type="checkbox"
+                      className="w-4 h-4 border border-gray-400 rounded-sm"
                     />
-                  </button>
-                  <button
-                    className="group"
-                    onClick={() =>
-                      navigate("/edit-product", { state: { product } })
-                    }
-                  >
+                  </td>
+                  <td className="p-2">
                     <img
-                      src={EditIcon}
-                      alt="Delete"
-                      className="w-10 h-10 group-hover:scale-120"
+                      src={product.images[0]?.replace('https://api.escuelajs.co/api/v1/files/', '/files/') || 'https://placehold.co/48x48'}
+                      alt={product.title}
+                      className="w-12 h-12 object-cover rounded"
+                      onError={(e) => {
+                        e.currentTarget.src = 'https://placehold.co/48x48';
+                      }}
                     />
-                  </button>
-                </td>
-              </tr>
-            ))}
+                  </td>
+                  <td className="p-2">{product.title}</td>
+                  <td className="p-2">{product.description.split(".")[0]}</td>
+                  <td className="p-2 pr-30">${product.price}</td>
+                  <td className="p-2 pr-5 flex gap-2">
+                    <button
+                      className="group"
+                      onClick={() => handleDeleteClick(product)}
+                    >
+                      <img
+                        src={DeleteIcon}
+                        alt="Delete"
+                        className="w-10 h-10 group-hover:scale-120 "
+                      />
+                    </button>
+                    <button
+                      className="group"
+                      onClick={() =>
+                        navigate("/edit-product", { state: { product } })
+                      }
+                    >
+                      <img
+                        src={EditIcon}
+                        alt="Delete"
+                        className="w-10 h-10 group-hover:scale-120"
+                      />
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
         </div>
