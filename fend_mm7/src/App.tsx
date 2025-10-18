@@ -173,8 +173,8 @@ const Header = () => {
 const Footer = () => {
   return (
     <footer className="mt-auto bg-[#F0F0F0] font-inter">
-      <div className="container mx-auto px-3 sm:px-4 py-8">
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-10 md:mb-12">
+      <div className="pt-[140px] pb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-10 md:mb-12 mx-4 sm:mx-8 md:mx-[100px]">
           {/* Store Info */}
           <div className="col-span-2 sm:col-span-4 lg:col-span-2 text-center sm:text-left">
             <h2 className="text-2xl sm:text-3xl mb-4 font-alfa-slab">FAKESTORE</h2>
@@ -219,13 +219,13 @@ const Footer = () => {
               </div>
             ))}
           </div>
-      <div className="h-px w-full bg-dividerColor bg-opacity-30 mt-4 sm:mt-6 md:mt-8 mb-4"></div>
+      <div className="h-px bg-dividerColor bg-opacity-30 mt-4 sm:mt-6 md:mt-8 mb-4 mx-4 sm:mx-8 md:mx-[100px]"></div>
         {/* Copyright and Payment Methods */}
-        <div className="mt-1 pt-1 flex flex-col sm:flex-row justify-between items-center">
+        <div className="mt-1 pt-1 flex flex-col sm:flex-row justify-between items-center sm:items-start mx-4 sm:mx-8 md:mx-[100px]">
           <p className="text-[#00000099] font-inter text-xs sm:text-sm md:text-[14px] mb-4 sm:mb-0 text-center sm:text-left">
             Fakestore© 2000-2023, All Rights Reserved
           </p>
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4">
+          <div className="flex flex-wrap justify-center sm:justify-end gap-2 sm:gap-3 md:gap-4">
             <img src="/visa.png" alt="Visa" className="h-6 sm:h-8 md:h-10" />
             <img
               src="/mastercard.png"

@@ -7,4 +7,16 @@
   --color-dividerColor: #0000001A;
   --font-alfa-slab: 'Alfa Slab One', cursive;
   --font-inter: 'Inter', sans-serif;
+  --animate-slide: slide-mobile 8s linear infinite;
+  --animate-slide-desktop: slide-desktop 20s linear infinite;
+}
+
+@keyframes slide-mobile {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes slide-desktop {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }

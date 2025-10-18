@@ -1,6 +1,5 @@
 // Mock API service for testing
 import { useState, useEffect } from "react";
- // Assuming ClothingItem is defined in Clothing.tsx
 import axios from "axios";
 import type { ClothingItem } from "./Clothing";
 
@@ -11,46 +10,31 @@ export const useClothingApi = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Simulate API fetch delay
     const fetchData = async () => {
       try {
         setLoading(true);
-        // Simulate network delay
-        const response = await axios.get(
-          "https://api.escuelajs.co/api/v1/categories/1/products"
-        );
-        console.log(response.data);
-        const mappedProducts = (
-          response.data as Array<{
-            id: number;
-            title: string;
-            price: number;
-            images: string[];
-            category?: { name: string };
-          }>
-        ).map((item, index) => ({
+        const response = await axios.get("https://api.escuelajs.co/api/v1/products");
+        
+        const mappedProducts = response.data.slice(0, 8).map((item: any, index: number) => ({
           id: item.id.toString(),
           name: item.title,
           price: item.price,
-          imageUrl: item.images[0]?.includes('placehold.co') ? item.images[0] : `https://placehold.co/600x400/e2e8f0/64748b?text=${encodeURIComponent(item.title.slice(0, 10))}`,
-          categoryName: item.category?.name || "unknown",
+          imageUrl: item.images[0] || `https://via.placeholder.com/400x400/f0f0f0/333333?text=${encodeURIComponent(item.title.slice(0, 10))}`,
+          categoryName: item.category?.name || "Clothes",
           category: index < 4 ? "new_arrivals" : "casual",
         }));
 
-        console.log(JSON.stringify(mappedProducts));
         setData(mappedProducts);
         setLoading(false);
-        // fetchClothingItems();
       } catch (err) {
-        console.log(err);
-        setError("Failed to fetch clothing items");
+        console.error("API Error:", err);
+        setError("Failed to fetch products");
         setLoading(false);
       }
     };
 
     fetchData();
   }, []);
+  
   return { data, loading, error };
 };
-
-// Actual API service (would replace mock in production)

@@ -12,9 +12,14 @@ const HomePage = () => {
     <main className="min-h-screen flex flex-col font-inter">
       {/* Hero Section */}
       <section 
-        className="relative min-h-screen bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: 'url(/bg2.png)' }}
+        className="relative min-h-screen bg-cover bg-[center_right_20%] sm:bg-center bg-no-repeat"
+        style={{ 
+          backgroundImage: 'url(/bg2.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center right 20%'
+        }}
       >
+        <div className="absolute inset-0 bg-white bg-opacity-60 sm:bg-transparent"></div>
         <div className="container mx-auto px-4 relative flex items-center min-h-screen">
           <div className="w-full max-w-2xl">
             <h1 className="font-alfa-slab font-[400] text-[28px] sm:text-[40px] md:text-[48px] lg:text-[64px] leading-tight mb-4 md:mb-6 text-black text-center sm:text-left">
@@ -47,22 +52,20 @@ const HomePage = () => {
         </div>
       </section>
       {/* Brands Section */}
-      <section className="bg-black text-white py-6 sm:py-8">
-        <div className="container mx-auto px-3 sm:px-4 flex flex-wrap justify-between items-center gap-y-4 sm:gap-8">
-          <div className="w-1/2 sm:w-1/3 md:w-auto flex justify-center px-2">
-            <img src={versaceSvg} alt="Versace" className="h-8 sm:h-10 md:h-12" />
-          </div>
-          <div className="w-1/2 sm:w-1/3 md:w-auto flex justify-center px-2">
-            <img src={zaraSvg} alt="Zara" className="h-8 sm:h-10 md:h-12" />
-          </div>
-          <div className="w-1/2 sm:w-1/3 md:w-auto flex justify-center px-2">
-            <img src={gucciSvg} alt="Gucci" className="h-8 sm:h-10 md:h-12" />
-          </div>
-          <div className="w-1/2 sm:w-1/3 md:w-auto flex justify-center px-2">
-            <img src={pradaSvg} alt="Prada" className="h-8 sm:h-10 md:h-12" />
-          </div>
-          <div className="w-1/2 sm:w-1/3 md:w-auto flex justify-center px-2">
-            <img src={calvinKleinSvg} alt="Calvin Klein" className="h-8 sm:h-10 md:h-12" />
+      <section className="bg-black text-white py-6 sm:py-8 overflow-hidden">
+        <div className="container mx-auto px-3 sm:px-4">
+          <div className="relative">
+            <div className="flex animate-slide sm:animate-slide-desktop gap-4 sm:gap-8 md:gap-12 items-center">
+              {[versaceSvg, zaraSvg, gucciSvg, pradaSvg, calvinKleinSvg, versaceSvg, zaraSvg, gucciSvg, pradaSvg, calvinKleinSvg].map((logo, index) => (
+                <div key={index} className="flex-shrink-0 min-w-[60px] sm:min-w-[80px] md:min-w-[120px] flex justify-center">
+                  <img 
+                    src={logo} 
+                    alt={['Versace', 'Zara', 'Gucci', 'Prada', 'Calvin Klein'][index % 5]} 
+                    className="h-5 sm:h-6 md:h-8 lg:h-10 max-w-full object-contain" 
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

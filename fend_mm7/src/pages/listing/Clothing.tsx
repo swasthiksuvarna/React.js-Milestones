@@ -23,9 +23,10 @@ interface StyleCategory {
 }
 
 // Component to display a section of clothing items
-const ClothingSection: React.FC<{ title: string; items: ClothingItem[] }> = ({
+const ClothingSection: React.FC<{ title: string; items: ClothingItem[]; loading?: boolean }> = ({
   title,
   items,
+  loading = false,
 }) => {
   return (
     <div className="my-4 sm:my-6 md:my-8 w-full">
@@ -33,11 +34,19 @@ const ClothingSection: React.FC<{ title: string; items: ClothingItem[] }> = ({
         {title}
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 w-full">
-        {items.map((item) => (
-          <div className="w-full flex justify-center" key={item.id}>
-            <ClothingItemCard item={item} />
-          </div>
-        ))}
+        {loading ? (
+          Array.from({ length: 4 }).map((_, index) => (
+            <div className="w-full flex justify-center" key={index}>
+              <ClothingItemCard loading={true} />
+            </div>
+          ))
+        ) : (
+          items.map((item) => (
+            <div className="w-full flex justify-center" key={item.id}>
+              <ClothingItemCard item={item} />
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
@@ -71,15 +80,28 @@ const ClothingCatalog: React.FC = () => {
 
   return (
     <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-6 md:py-8">
-      {newArrivals.length > 0 && (
-        <ClothingSection title="NEW ARRIVALS" items={newArrivals} />
+      {loading ? (
+        <>
+          <ClothingSection title="NEW ARRIVALS" items={[]} loading={true} />
+          <div className="h-px w-full bg-dividerColor bg-opacity-30 my-4 sm:my-6 md:my-8"></div>
+          <ClothingSection title="CASUAL" items={[]} loading={true} />
+        </>
+      ) : (
+        <>
+          {newArrivals.length > 0 && (
+            <ClothingSection title="NEW ARRIVALS" items={newArrivals} />
+          )}
+          {newArrivals.length > 0 && casualItems.length > 0 && (
+            <div className="h-px w-full bg-dividerColor bg-opacity-30 my-4 sm:my-6 md:my-8"></div>
+          )}
+          {casualItems.length > 0 && (
+            <ClothingSection title="CASUAL" items={casualItems} />
+          )}
+        </>
       )}
-      {/* Divider line */}
-      <div className="h-px w-full bg-dividerColor bg-opacity-30 my-4 sm:my-6 md:my-8"></div>
-      {casualItems.length > 0 && (
-        <ClothingSection title="CASUAL" items={casualItems} />
+      {(newArrivals.length > 0 || casualItems.length > 0) && (
+        <div className="h-px w-full bg-dividerColor bg-opacity-30 my-8 sm:my-12 md:my-16"></div>
       )}
-      <div className="h-px w-full bg-dividerColor bg-opacity-30 my-8 sm:my-12 md:my-16"></div>
       <section className="w-full">
         <div className="w-full p-4 sm:p-6 md:p-[64px] bg-[#F0F0F0] rounded-xl sm:rounded-2xl md:rounded-3xl my-4 sm:my-6 md:my-8">
           <h1 className="text-[28px] sm:text-[36px] md:text-[48px] font-[400] text-center mb-4 sm:mb-6 md:mb-8 font-alfa-slab">
